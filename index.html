@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<!--
+***************************************************************************
+Title:  Home Page
+Use:    Single-page responsive site with animated transitions
+Author: Ian Ray
+Developed: Sep 26, 2025
+***************************************************************************
+-->
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miner & East Construction</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="java.js" defer></script>
+
+    <link rel="preload" href="fonts/Zurich Bold Condensed BT.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="fonts/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+    <link rel="preload" href="fonts/MyriadPro-Regular.otf" as="font" type="font/otf" crossorigin>
+    <link rel="preload" href="fonts/Helvetica Now Var.ttf" as="font" type="font/ttf" crossorigin>
+
+</head>
+
+<body>
+  <!-- Hero / Landing View -->
+  <header class="hero" id="home">
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <img src="images/logo.png" alt="Miner & East" class="hero-logo">
+      <p class="tagline">VALUE, WORKMANSHIP & PROFESSIONALISM</p>
+      <a href="#services" class="btn hero-btn">Explore Our Work</a>
+    </div>
+
+    <nav class="nav hero-nav">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#assignments">Assignments</a></li>
+        <li><a href="#history">History</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Top Nav (appears after hero scrolls up) -->
+  <nav class="top-nav">
+    <div class="nav-logo">
+      Miner <span class="and">&amp;</span> East
+    </div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#assignments">Assignments</a></li>
+      <li><a href="#history">History</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <!-- Secondary Landing (Services Intro) -->
+    <section class="secondary-landing" id="intro">
+      <div class="secondary-content">
+        <h2>Trusted Construction Since 1895</h2>
+        <p>
+          For over a century, Miner & East has provided quality craftsmanship
+          and dependable restoration services across Chicagoland.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="view view-services">
+      <div class="view-content">
+        <h2>Our Services</h2>
+        <p>
+          From residential restoration to large-scale commercial construction,
+          Miner & East provides dependable craftsmanship across Chicagoland.
+        </p>
+      </div>
+    </section>
+
+    <!-- Assignments -->
+    <section id="assignments" class="view view-assignments">
+      <div class="view-content">
+        <h2>Assignments</h2>
+        <p>
+          Current and upcoming projects that highlight our dedication to precision and client satisfaction.
+        </p>
+      </div>
+    </section>
+
+    <!-- History -->
+    <section id="history" class="view view-history">
+      <div class="view-content">
+        <h2>Our History</h2>
+        <p>
+          Established in 1895, Miner & East has over a century of proven experience in high-quality construction and restoration.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="view view-contact">
+      <div class="view-content">
+        <h2>Contact Us</h2>
+        <p>
+          Let’s build something exceptional together.<br>
+          Email: <a href="mailto:info@minerandeast.com">info@minerandeast.com</a><br>
+          Phone: (555) 123-4567
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Miner & East Construction. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
+
