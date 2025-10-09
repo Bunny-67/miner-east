@@ -53,11 +53,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let hasScrolled = false;
 
-  // Find the "Home" anchor and parent list item
+  // Find anchor and parent list item
   const homeAnchor = document.querySelector('.top-nav a[href="#home"]') || document.querySelector('a[href="#home"]');
   const homeLi = homeAnchor ? homeAnchor.closest('li') : null;
 
-  // Smooth scroll to top when clicking "Home"
+  // Smooth scroll
   if (homeAnchor) {
     homeAnchor.addEventListener('click', (event) => {
       event.preventDefault();
@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Hide Home link if at top on page load
   if (homeLi && window.scrollY <= 5) {
     homeLi.style.display = 'none';
   }

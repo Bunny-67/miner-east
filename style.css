@@ -62,7 +62,6 @@
   box-sizing: border-box;
 }
 
-/* Put scroll-snap on root so window scrolling triggers hero JS */
 html, body {
   height: 100%;
   width: 100%;
@@ -74,16 +73,13 @@ html, body {
   color: var(--text);
 }
 
-/* small helper so normal .section sections still animate */
 body .section, .view {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* ------------------------------------------------
-   HERO (Initial Landing) — consolidated
-   - fixed to viewport so it overlays content
-   - slides up via .hero.move-up
+   HERO
 --------------------------------------------------*/
 .hero {
   position: fixed;
@@ -106,12 +102,10 @@ body .section, .view {
   pointer-events: auto;
 }
 
-/* slide hero up to reveal the page underneath */
 .hero.move-up {
   transform: translateY(-100vh);
 }
 
-/* overlay for contrast */
 .hero .overlay {
   position: absolute;
   inset: 0;
@@ -119,7 +113,6 @@ body .section, .view {
   z-index: 0;
 }
 
-/* hero content (logo image or text + tagline + CTA) */
 .hero-content {
   position: relative;
   z-index: 1;
@@ -130,7 +123,6 @@ body .section, .view {
   align-items: center;
 }
 
-/* hero logo image (if used) */
 .hero-logo {
   width: clamp(250px, 40vw, 450px);
   height: auto;
@@ -139,7 +131,6 @@ body .section, .view {
   transform-origin: bottom;
 }
 
-/* (fallback) text-logo style — if you use text logo elsewhere */
 .hero .logo.large {
   font-family: 'ZurichBold', sans-serif;
   color: #ffffff;
@@ -151,25 +142,22 @@ body .section, .view {
   line-height: 1;
 }
 
-/* Ampersand fallback */
 .hero .logo .and {
   font-family: 'MyriadProBold', sans-serif;
   color: #ffffff;
 }
 
-/* tagline styling (very tight to logo) */
 .hero .tagline {
   font-family: 'Montserrat', sans-serif;
   font-weight: 400;
   font-size: clamp(1.5rem, 3.8vw, 2.5rem);
   color: #ffffff;
   letter-spacing: 1px;
-  margin-top: -12px;   /* tight gap beneath logo */
+  margin-top: -12px;   
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 6px rgba(0,0,0,0.5);
 }
 
-/* hero CTA */
 .hero-btn {
   margin-top: 0;
   background: var(--accent);
@@ -186,8 +174,7 @@ body .section, .view {
 }
 
 /* ------------------------------------------------
-   HERO NAV (initial, minimal nav while hero visible)
-   Support both .hero-nav (your markup) and older .hero .nav selectors
+   HERO NAV 
 -------------------------------------------------*/
 .hero-nav,
 .hero .nav {
@@ -220,7 +207,6 @@ body .section, .view {
   overflow: hidden;
 }
 
-/* hero hover image behind each button (prevents full-bar fill) */
 .hero-nav a::before,
 .hero .nav a::before {
   content: "";
@@ -238,18 +224,17 @@ body .section, .view {
   opacity: 1;
 }
 
-/* keep text white on hover (per your request) */
 .hero-nav a:hover,
 .hero .nav a:hover {
   color: #fff;
 }
 
 /* ------------------------------------------------
-   TOP NAV (appears once user enters secondary view)
+   TOP NAV 
 ------------------------------------------------- */
 .top-nav {
   position: fixed;
-  top: -100px; /* hidden initially */
+  top: -100px; 
   left: 0;
   width: 100%;
   height: 80px;
@@ -267,7 +252,6 @@ body .section, .view {
   top: 0;
 }
 
-/* logo in top nav */
 .top-nav .nav-logo {
   font-family: 'ZurichBold', sans-serif;
   font-size: 1.5rem;
@@ -277,13 +261,11 @@ body .section, .view {
   transform-origin: bottom;
 }
 
-/* ampserand in top nav (keeps Myriad) */
 .top-nav .nav-logo .and {
   font-family: 'MyriadProBold', sans-serif;
   color: #fff;
 }
 
-/* top-nav links */
 .top-nav .nav-links {
   list-style: none;
   display: flex;
@@ -302,7 +284,6 @@ body .section, .view {
   transition: color 0.25s ease;
 }
 
-/* hover image behind each top-nav button */
 .top-nav .nav-links li a::before {
   content: "";
   position: absolute;
@@ -318,14 +299,12 @@ body .section, .view {
   opacity: 1;
 }
 
-/* keep text white on hover */
 .top-nav .nav-links li a:hover {
   color: #fff;
 }
 
 /* ------------------------------------------------
-   Secondary Landing (Services) — normal flow
-   (No longer fixed; reveals when hero slides up)
+   Secondary Landing (Services)
 ------------------------------------------------- */
 .secondary-landing {
   position: relative;
@@ -369,7 +348,6 @@ body .section, .view {
 
 /* ------------------------------------------------
    Full-Page Views (Assignments, History, Contact)
-   Each view behaves like a "panel" and animates in
 ------------------------------------------------- */
 .view {
   position: relative;
@@ -387,7 +365,6 @@ body .section, .view {
   scroll-snap-align: start;
 }
 
-/* allow either 'visible' or 'active-view' depending on JS you use */
 .view.visible,
 .view.active-view {
   opacity: 1;
@@ -412,25 +389,25 @@ body .section, .view {
   line-height: 1.6;
 }
 
-/* Temporary background colors for testing animation */
+/* Temporary background colors */
 .view-services {
-  background: #fce4ec; /* soft pink */
+  background: #fce4ec; /* pink */
 }
 
 .view-assignments {
-  background: #e3f2fd; /* light blue */
+  background: #e3f2fd; /* blue */
 }
 
 .view-history {
-  background: #e8f5e9; /* light green */
+  background: #e8f5e9; /* green */
 }
 
 .view-contact {
-  background: #fff3e0; /* light orange */
+  background: #fff3e0; /* orange */
 }
 
 /* ------------------------------------------------
-   Misc: legacy header styles (kept for compatibility)
+   Misc: legacy header styles 
 ------------------------------------------------- */
 .header {
   position: fixed;
@@ -463,7 +440,7 @@ body .section, .view {
 }
 
 /* ------------------------------------------------
-   Legacy .section (small content sections)
+   Legacy .section 
 ------------------------------------------------- */
 .section {
   min-height: 100vh;
