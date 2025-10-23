@@ -304,13 +304,13 @@ body .section, .view {
 }
 
 /* ------------------------------------------------
-   Secondary Landing (Services)
+   Secondary Landing 
 ------------------------------------------------- */
 .secondary-landing {
   position: relative;
   height: 100vh;
   width: 100%;
-  background: var(--bg); /* revert to final BG later */
+  background: var(--bg); 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -329,8 +329,11 @@ body .section, .view {
 }
 
 .secondary-content {
-  max-width: 700px;
+  max-width: 1400px;
+  width: 90%;
+  margin: 0 auto;
 }
+
 
 .secondary-landing h2 {
   font-family: 'ZurichBold', sans-serif;
@@ -345,6 +348,384 @@ body .section, .view {
   font-size: 1.25rem;
   line-height: 1.6;
 }
+
+/* ------------------------------------------------
+   Secondary Landing: Meet the Team
+------------------------------------------------- */
+.secondary-landing {
+  position: relative;
+  height: auto;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9f9fb, #f0f2f8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 5rem 2rem;
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 1.2s cubic-bezier(0.77, 0, 0.175, 1),
+              transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+  z-index: 1;
+}
+
+.secondary-landing.reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.secondary-landing h2 {
+  font-family: 'ZurichBold', sans-serif;
+  color: var(--primary);
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  margin-bottom: 1.5rem;
+  margin-top: 4rem;
+}
+
+.secondary-landing .intro-text {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--text);
+  font-size: 1.2rem;
+  line-height: 1.7;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 1rem;  
+  row-gap: 2rem;     
+  width: 100%;
+  max-width: 1000px; 
+  margin: 0 auto;
+  justify-content: center;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+
+.team-member {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.team-member img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.team-member h3 {
+  font-family: 'ZurichBold', sans-serif;
+  font-size: 1.25rem;
+  color: var(--primary);
+  margin-bottom: 0.3rem;
+}
+
+.team-member p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ------------------------------------------------
+   Team Modal Popup
+------------------------------------------------- */
+.team-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.team-modal.show {
+  display: flex;
+}
+
+.team-modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 800px;
+  width: 95%;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  animation: fadeInModal 0.4s ease forwards;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.team-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.team-modal-close:hover {
+  color: var(--primary);
+}
+
+.team-modal-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.team-modal-inner img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 100%;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.team-modal-text {
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.team-modal-text h3 {
+  font-family: 'ZurichBold', sans-serif;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.team-modal-text p {
+  margin: 0.4rem 0;
+  color: #444;
+  line-height: 1.6;
+}
+
+.team-modal-text .bio {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+@media (min-width: 768px) {
+  .team-modal-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .team-modal-inner img {
+    margin-right: 2rem;
+    margin-bottom: 0;
+  }
+}
+
+/* ------------------------------------------------
+   Services Section
+------------------------------------------------- */
+#services.view {
+  height: auto !important;
+  min-height: 100vh;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  scroll-snap-align: start;
+}
+
+.services-content {
+  max-width: 3000px; 
+  margin: 0 auto;
+  padding: 0 60px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.services-content h2 {
+  font-family: 'ZurichBold', sans-serif;
+  color: var(--primary);
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.services-intro { 
+  font-family: 'Montserrat', sans-serif; 
+  font-size: 1.2rem; 
+  color: #333; 
+  line-height: 1.9; 
+  max-width: 3000px; 
+  margin: 0 auto 4rem; 
+  text-align: center; }
+
+.services-summary {
+  max-width: 1400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.services-summary p {
+  font-family: 'Lora', serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(500px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+  margin-bottom: 5rem;
+}
+
+.service-card {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.service-card h3 {
+  font-family: 'ZurichBold', sans-serif;
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.service-card p {
+  font-family: 'Montserrat', sans-serif;
+  color: #444;
+  font-size: 1.05rem;
+  line-height: 1.55;
+  flex-grow: 1;
+}
+
+.values-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.values-list {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 340px; 
+  margin: 4rem auto 0;
+  list-style: none;
+  padding: 0;
+  left: -100px;
+}
+
+.values-list li {
+  position: absolute;
+  font-weight: 600;
+  color: var(--primary);
+  opacity: 0.95;
+  transition: transform 2s ease-in-out, color 0.3s ease;
+  animation: drift 10s ease-in-out infinite alternate;
+  white-space: nowrap;
+}
+
+.values-list li:nth-child(1) { top: 10%; left: 0%; font-size: 2.2rem; font-family: 'Myriad Pro Bold', sans-serif; }
+.values-list li:nth-child(2) { top: 45%; left: 0%; font-size: 1.3rem; font-family: 'Myriad Pro', sans-serif; }
+.values-list li:nth-child(3) { top: 10%; left: 78%; font-size: 1.2rem; font-family: 'Myriad Pro Light', sans-serif; }
+.values-list li:nth-child(4) { top: 25%; left: 38%; font-size: 2.4rem; font-family: 'Myriad Pro SemiCondensed', sans-serif; }
+.values-list li:nth-child(5) { top: 55%; left: 5%; font-size: 2.8rem; font-family: 'Myriad Pro', sans-serif; }
+.values-list li:nth-child(6) { top: 75%; left: 55%; font-size: 1.3rem; font-family: 'Myriad Pro Bold', sans-serif; }
+.values-list li:nth-child(7) { top: 45%; left: 68%; font-size: 1.4rem; font-family: 'Myriad Pro Light', sans-serif; }
+
+@keyframes drift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(6px, -4px); }
+}
+
+.values-list li:nth-child(1) { animation-delay: 0s; }
+.values-list li:nth-child(2) { animation-delay: 1s; }
+.values-list li:nth-child(3) { animation-delay: 2s; }
+.values-list li:nth-child(4) { animation-delay: 3s; }
+.values-list li:nth-child(5) { animation-delay: 1.5s; }
+.values-list li:nth-child(6) { animation-delay: 2.5s; }
+.values-list li:nth-child(7) { animation-delay: 0.5s; }
+
+.values-list li:hover {
+  color: var(--accent);
+  transform: scale(1.05);
+}
+
+@media (max-width: 1100px) {
+  .values-list {
+    height: 280px;
+    max-width: 800px;
+    left: 0; 
+  }
+}
+
+@media (max-width: 800px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .values-list {
+    height: 240px;
+    max-width: 400px;
+    left: 0;
+  }
+
+  .values-list li {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    animation: none;
+  }
+}
+
 
 /* ------------------------------------------------
    Full-Page Views (Assignments, History, Contact)
