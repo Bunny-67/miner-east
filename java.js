@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
   // ================================================
-  // Fade-in on Scroll for Page Sections
+  // Fade-in on Scroll for legacy .section
   // ================================================
   const sections = document.querySelectorAll('.section');
   if (sections.length > 0) {
@@ -25,10 +25,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================================
-  // Section View Transitions 
+  // Section View Transitions (.view visibility)
   // ================================================
   const views = document.querySelectorAll('.view');
-
   if (views.length > 0) {
     const viewObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -42,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================================
-  // Hero → Secondary 
+  // Hero / Secondary wiring
   // ================================================
   const hero = document.querySelector('.hero');
   const secondary = document.querySelector('.secondary-landing');
@@ -71,58 +70,59 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ================================================
-  // Home anchor logic (Top Nav)
+  // Home anchor logic 
   // ================================================
-  const homeAnchor = document.querySelector('.top-nav a[href="#home"]');
-  const homeLi = homeAnchor ? homeAnchor.closest('li') : null;
+  const homeAnchors = document.querySelectorAll('.top-nav a[href="#home"]');
 
-  if (homeAnchor) {
-    homeAnchor.addEventListener('click', (event) => {
-      event.preventDefault();
-      hero.classList.remove('move-up');
-      secondary.classList.remove('reveal');
-      if (topNav) topNav.classList.remove('visible');
-      hasScrolled = false;
-      isAutoScrolling = false;
-      smoothScrollTo(0);
-    });
-  }
+  const goHome = (event) => {
+    event?.preventDefault?.();
+    hero?.classList.remove('move-up');
+    secondary?.classList.remove('reveal');
+    topNav?.classList.remove('visible');
+    hasScrolled = false;
+    isAutoScrolling = false;
+    smoothScrollTo(0);
+  };
 
-  if (homeLi && window.scrollY <= 5) {
+  homeAnchors.forEach(a => a.addEventListener('click', goHome));
+
+  const homeLi =
+    document.querySelector('.top-nav .nav-links a[href="#home"]')?.closest('li') || null;
+
+  if (homeLi && (window.scrollY || window.pageYOffset) <= 5) {
     homeLi.style.display = 'none';
   }
 
+
   // ================================================
-  // Hero Nav Direct Section Links 
+  // Hero & Top-Nav anchor links 
   // ================================================
-    const navLinks = document.querySelectorAll(
-      '.hero-nav a[href^="#"]:not(.nav-home), .top-nav a[href^="#"]:not([href="#home"])'
-    );
+  const navLinks = document.querySelectorAll(
+    '.hero-nav a[href^="#"]:not(.nav-home), .top-nav a[href^="#"]:not([href="#home"])'
+  );
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const targetId = link.getAttribute('href');
-        const target = document.querySelector(targetId);
-        if (!target) return;
+  navLinks.forEach(link => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('href');
+      const target = document.querySelector(targetId);
+      if (!target) return;
 
-        const scrollY = window.scrollY || window.pageYOffset;
-        if (scrollY < window.innerHeight * 0.5 && hero && secondary) {
-          hero.classList.add('move-up');
-          secondary.classList.add('reveal');
-          if (topNav) topNav.classList.add('visible');
-          hasScrolled = true;
+      const scrollY = window.scrollY || window.pageYOffset;
+      if (scrollY < window.innerHeight * 0.5 && hero && secondary) {
+        hero.classList.add('move-up');
+        secondary.classList.add('reveal');
+        topNav?.classList.add('visible');
+        hasScrolled = true;
 
-          setTimeout(() => {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 350);
-        } else {
+        setTimeout(() => {
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
+        }, 350);
+      } else {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
-
-
+  });
 
   // ================================================
   // Scroll Handler Logic 
@@ -133,12 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const scrollY = window.scrollY || window.pageYOffset;
     const mainTop = getMainTop();
 
-    // --- Down: Hero -> Secondary ---
     if (hero && secondary) {
       if (scrollY > 5 && !hasScrolled) {
         hero.classList.add('move-up');
         secondary.classList.add('reveal');
-        if (topNav) topNav.classList.add('visible');
+        topNav?.classList.add('visible');
         hasScrolled = true;
 
         holdAtIntroUntil = Date.now() + 250;
@@ -146,7 +145,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // --- Up: Secondary -> Hero ---
+      if (hasScrolled && scrollY <= 2) {
+        hero.classList.remove('move-up');
+        secondary.classList.remove('reveal');
+        topNav?.classList.remove('visible');
+        hasScrolled = false;
+        return;
+      }
+
       const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
       if (hasScrolled && nearIntroTop) {
         if (Date.now() < holdAtIntroUntil) {
@@ -166,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ================================================
-  // Throttle
+  // Throttle utility
   // ================================================
   const throttle = (func, limit) => {
     let lastFunc;
@@ -193,21 +199,32 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 
   // ================================================
-  // Upward intent detection (wheel event)
+  // Upward intent detection — expanded
   // ================================================
   window.addEventListener('wheel', (e) => {
-    if (isAutoScrolling || !hasScrolled) return;
+    if (isAutoScrolling) return;
 
     const mainTop = getMainTop();
     const scrollY = window.scrollY || window.pageYOffset;
-    const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
 
-    if (nearIntroTop && e.deltaY < 0) {
+    if (hasScrolled && e.deltaY < 0 && scrollY < mainTop * 0.6) {
       e.preventDefault();
       holdAtIntroUntil = 0;
-      hero.classList.remove('move-up');
-      secondary.classList.remove('reveal');
-      if (topNav) topNav.classList.remove('visible');
+      hero?.classList.remove('move-up');
+      secondary?.classList.remove('reveal');
+      topNav?.classList.remove('visible');
+      hasScrolled = false;
+      smoothScrollTo(0);
+      return;
+    }
+
+    const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
+    if (hasScrolled && nearIntroTop && e.deltaY < 0) {
+      e.preventDefault();
+      holdAtIntroUntil = 0;
+      hero?.classList.remove('move-up');
+      secondary?.classList.remove('reveal');
+      topNav?.classList.remove('visible');
       hasScrolled = false;
       smoothScrollTo(0);
     }
@@ -231,11 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================================
-  // Hero Nav
+  // Hero Nav shortcut to Team (Meet the Team)
   // ================================================
   const heroHome = document.querySelector('.hero-nav a.nav-home');
   const introSection = document.querySelector('#intro');
-
   if (heroHome && introSection) {
     heroHome.addEventListener('click', (event) => {
       event.preventDefault();
@@ -244,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ================================================
-  // Hero 
+  // Quick #services smooth-scroll hooks
   // ================================================
   document.querySelectorAll('a[href="#services"]').forEach(link => {
     link.addEventListener('click', (event) => {
@@ -256,44 +272,234 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-    // ================================================
-    // Team Member Modal Logic
-    // ================================================
-    const teamMembers = document.querySelectorAll('.team-member');
-    const modal = document.getElementById('teamModal');
-    const modalImage = document.getElementById('modalImage');
-    const modalName = document.getElementById('modalName');
-    const modalRole = document.getElementById('modalRole');
-    const modalJoined = document.getElementById('modalJoined');
-    const modalContact = document.getElementById('modalContact');
-    const modalBio = document.getElementById('modalBio');
-    const modalClose = document.querySelector('.team-modal-close');
+  // ================================================
+  // Team Member Modal Logic
+  // ================================================
+  const teamMembers = document.querySelectorAll('.team-member');
+  const modal = document.getElementById('teamModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalName = document.getElementById('modalName');
+  const modalRole = document.getElementById('modalRole');
+  const modalJoined = document.getElementById('modalJoined');
+  const modalContact = document.getElementById('modalContact');
+  const modalBio = document.getElementById('modalBio');
+  const modalClose = document.querySelector('.team-modal-close');
 
-    teamMembers.forEach(member => {
-      member.addEventListener('click', () => {
-        modalImage.src = member.querySelector('img').src;
-        modalName.textContent = member.dataset.name || '';
-        modalRole.textContent = member.dataset.role || '';
-        modalJoined.textContent = member.dataset.joined || '';
-        modalContact.textContent = member.dataset.contact || '';
-        modalBio.textContent = member.dataset.bio || '';
-        modal.classList.add('show');
-        document.body.style.overflow = 'hidden'; // prevent scroll while open
-      });
+  teamMembers.forEach(member => {
+    member.addEventListener('click', () => {
+      const img = member.querySelector('img');
+      if (img) modalImage.src = img.src;
+      modalName.textContent = member.dataset.name || '';
+      modalRole.textContent = member.dataset.role || '';
+      modalJoined.textContent = member.dataset.joined || '';
+      modalContact.textContent = member.dataset.contact || '';
+      modalBio.textContent = member.dataset.bio || '';
+      modal.classList.add('show');
+      document.body.style.overflow = 'hidden'; 
     });
+  });
 
+  if (modalClose) {
     modalClose.addEventListener('click', () => {
       modal.classList.remove('show');
       document.body.style.overflow = '';
     });
+  }
 
-    // Close modal when clicking outside
+  if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         modal.classList.remove('show');
         document.body.style.overflow = '';
       }
     });
+  }
 
+  // ================================================
+  // Make top-left nav logo go Home 
+  // ================================================
+  const topLogo = document.querySelector('.top-nav .nav-logo');
+  if (topLogo) {
+    topLogo.style.cursor = 'pointer';
+    topLogo.addEventListener('click', (e) => {
+      if (topLogo.tagName.toLowerCase() === 'a') e.preventDefault();
+      hero?.classList.remove('move-up');
+      secondary?.classList.remove('reveal');
+      topNav?.classList.remove('visible');
+      hasScrolled = false;
+      isAutoScrolling = false;
+      smoothScrollTo(0);
+    });
+  }
+
+  // ================================================
+  // Services "word cloud" -> History 
+  // ================================================
+  const cloudItems = document.querySelectorAll('.values-list li');
+  const historyEl = document.querySelector('#history');
+  if (cloudItems.length && historyEl) {
+    const goHistory = (evt) => {
+      evt?.preventDefault?.();
+      historyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    cloudItems.forEach(li => {
+      li.setAttribute('tabindex', '0');
+      li.addEventListener('click', goHistory);
+      li.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') goHistory(e);
+      });
+    });
+  }
+
+    // ================================================
+    // Assignments: filter controls 
+    // ================================================
+    const filterBar = document.querySelector('.assignments-filter');
+    const filterButtons = document.querySelectorAll('.assignments-filter .filter-btn');
+    const assignmentCards = document.querySelectorAll('.assignments-grid .assignment-card');
+
+    if (filterBar && filterButtons.length && assignmentCards.length) {
+      const applyFilter = (status) => {
+        assignmentCards.forEach(card => {
+          const s = card.getAttribute('data-status');
+          const show = (status === 'all') || (s === status);
+          card.classList.toggle('is-hidden', !show);
+        });
+      };
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          filterButtons.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+
+          applyFilter(btn.getAttribute('data-filter') || 'all');
+        });
+      });
+
+      applyFilter('all');
+    }
+
+  // ================================================
+  // Assignments: Marquee 
+  // ================================================
+  const sourceWrap = document.querySelector('.assignments-source');
+  const marquee = document.querySelector('.assignments-marquee');
+  const rows = marquee ? marquee.querySelectorAll('.marquee-row .marquee-track') : [];
+  const toggleBtn = document.querySelector('.view-static-btn');
+  const staticPanel = document.querySelector('.assignments-static');
+  const staticStrip = staticPanel ? staticPanel.querySelector('.static-strip') : null;
+  const staticPrev = staticPanel ? staticPanel.querySelector('.static-prev') : null;
+  const staticNext = staticPanel ? staticPanel.querySelector('.static-next') : null;
+  const staticClose = staticPanel ? staticPanel.querySelector('.static-close') : null;
+  const pageIndicator = staticPanel ? staticPanel.querySelector('.static-page-indicator') : null;
+
+  const gatherCards = () => {
+    const active = document.querySelector('.assignments-filter .filter-btn.active');
+    const status = active ? (active.getAttribute('data-filter') || 'all') : 'all';
+    const all = sourceWrap ? Array.from(sourceWrap.querySelectorAll('.assignment-card')) : [];
+    return status === 'all' ? all : all.filter(c => (c.getAttribute('data-status') || '') === status);
+  };
+
+  const buildMarquee = () => {
+    if (!rows.length) return;
+    rows.forEach(track => (track.innerHTML = ''));
+    const cards = gatherCards();
+    if (!cards.length) return;
+
+    const buckets = [[], [], []];
+    cards.forEach((card, i) => buckets[i % 3].push(card));
+
+    buckets.forEach((bucket, idx) => {
+      const track = rows[idx];
+      const frag = document.createDocumentFragment();
+      bucket.forEach(c => frag.appendChild(c.cloneNode(true)));
+      bucket.forEach(c => frag.appendChild(c.cloneNode(true))); // duplicate for -50% loop
+      track.appendChild(frag);
+
+      const rowEl = track.closest('.marquee-row');
+      const sp = rowEl ? parseInt(rowEl.getAttribute('data-speed'), 10) : 40;
+      track.style.animationDuration = `${isFinite(sp) ? sp : 40}s`;
+    });
+  };
+
+  let staticState = { page: 0, pages: 0 };
+  const buildStatic = () => {
+    if (!staticStrip) return;
+    staticStrip.innerHTML = '';
+    const cards = gatherCards().map(c => c.cloneNode(true));
+    const perPage = 9;
+    const pages = Math.max(1, Math.ceil(cards.length / perPage));
+    staticState.page = 0;
+    staticState.pages = pages;
+
+    for (let p = 0; p < pages; p++) {
+      const pageEl = document.createElement('div');
+      pageEl.className = 'static-page';
+      const slice = cards.slice(p * perPage, p * perPage + perPage);
+      slice.forEach(card => pageEl.appendChild(card));
+      staticStrip.appendChild(pageEl);
+    }
+    updateStaticUI();
+  };
+
+  const updateStaticUI = () => {
+    if (!staticStrip) return;
+    staticStrip.style.transform = `translateX(-${staticState.page * 100}%)`;
+    if (pageIndicator) pageIndicator.textContent = `${staticState.page + 1} / ${staticState.pages}`;
+  };
+
+  const gotoPage = (p) => {
+    staticState.page = (p + staticState.pages) % staticState.pages;
+    updateStaticUI();
+  };
+
+  const openStatic = () => {
+    if (!staticPanel || !marquee || !toggleBtn) return;
+    marquee.hidden = true;
+    staticPanel.hidden = false;
+    buildStatic();
+    toggleBtn.textContent = 'Close Static View';
+    toggleBtn.setAttribute('aria-pressed', 'true');
+    toggleBtn.classList.add('is-open');
+    toggleBtn.style.display = 'none';
+  };
+
+  const openMarquee = () => {
+    if (!staticPanel || !marquee || !toggleBtn) return;
+    staticPanel.hidden = true;
+    marquee.hidden = false;
+    buildMarquee();
+    toggleBtn.textContent = 'Open Static View';
+    toggleBtn.setAttribute('aria-pressed', 'false');
+    toggleBtn.classList.remove('is-open');
+    toggleBtn.style.display = 'inline-block';
+  };
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      if (toggleBtn.classList.contains('is-open')) openMarquee();
+      else openStatic();
+    });
+  }
+
+  if (staticClose) staticClose.addEventListener('click', openMarquee);
+
+  if (staticPrev) staticPrev.addEventListener('click', () => gotoPage(staticState.page - 1));
+  if (staticNext) staticNext.addEventListener('click', () => gotoPage(staticState.page + 1));
+
+  const filterBtns = document.querySelectorAll('.assignments-filter .filter-btn');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filterBtns.forEach(b => b.setAttribute('aria-selected', b === btn ? 'true' : 'false'));
+      if (staticPanel && !staticPanel.hidden) buildStatic();
+      else buildMarquee();
+    });
+  });
+
+  openMarquee();
 
 });

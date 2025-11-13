@@ -51,11 +51,12 @@ Developed: Sep 26, 2025
 
   <!-- Top Nav  -->
   <nav class="top-nav">
-    <div class="nav-logo">
-      Miner <span class="and">&amp;</span> East
-    </div>
+    <a href="#home" class="nav-logo" aria-label="Miner & East — Home">
+      <img src="images/logo.png" alt="Miner & East" />
+    </a>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
+      <li><a href="#intro">The Team</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#assignments">Assignments</a></li>
       <li><a href="#history">History</a></li>
@@ -171,42 +172,47 @@ Developed: Sep 26, 2025
         <div class="services-grid">
           <div class="service-card">
             <h3>Construction Consulting</h3>
-            <p>
-              Miner & East has a long-standing reputation in the construction consulting industry.
-              We have provided consulting on thousands of insurance loss projects nationwide,
-              including major claims from fire, hurricanes, tornadoes, floods, and other catastrophic events.
-              Our understanding of the insurance industry ensures accurate, reliable guidance
-              and efficient recovery processes for every client.
+            <p> 
+                Miner & East has a long-standing reputation in the construction consulting industry.
+                We have provided consulting on thousands of insurance loss projects nationwide,
+                including major claims from fire, hurricanes, tornadoes, floods, and other catastrophic events.
+                Our understanding of the insurance industry ensures accurate, reliable guidance
+                and efficient recovery processes for every client.
             </p>
+            <div class="service-icon-slot" aria-hidden="true">
+              <img src="images/serviceIcon1.png" alt="Consulting Icon">
+            </div> 
           </div>
 
           <div class="service-card">
             <h3>Insurance Loss Reconstruction & Emergency Services</h3>
-            <p>
+            <p> 
               Miner & East is a true general contracting firm with in-house staff of
               estimators, project managers, superintendents, carpenters, clerical, and accounting personnel.
               We understand what it takes to stabilize and protect a building following an insurance loss.
               With extensive experience in claim preparation and emergency reconstruction,
-              our team has successfully restored a wide variety of buildings across our long history.
+              our team has successfully restored a wide variety of buildings across our long history. 
             </p>
+            <div class="service-icon-slot" aria-hidden="true">
+              <img src="images/serviceIcon2.png" alt="Consulting Icon">
+            </div> 
           </div>
 
           <div class="service-card">
             <h3>New Construction & Renovations</h3>
-            <p>
+            <p> 
               Over the decades, Miner & East has completed a wide range of new construction
               and renovation projects for commercial, industrial, and retail properties.
               Our experience as general contractors, combined with our expertise in reconstruction,
               positions us to deliver quality craftsmanship across every assignment.
-            </p>
+           </p>
+            <div class="service-icon-slot" aria-hidden="true">
+              <img src="images/serviceIcon3.png" alt="Consulting Icon">
+            </div> 
           </div>
         </div>
 
         <div class="services-summary">
-          <p>
-            Our construction expertise, coupled with our deep experience in insurance loss reconstruction,
-            makes Miner & East one of the most trusted general contractors and consultants in the nation.
-          </p>
           <div class="values-wrapper">
             <ul class="values-list">
               <li>Honesty and integrity</li>
@@ -223,35 +229,467 @@ Developed: Sep 26, 2025
     </section>
 
 
+
     <!-- Assignments -->
-    <section id="assignments" class="view view-assignments">
-      <div class="view-content">
-        <h2>Assignments</h2>
-        <p>
-          Current and upcoming projects.
-        </p>
-      </div>
-    </section>
+      <section id="assignments" class="view view-assignments">
+        <div class="view-content assignments-content">
+          <h2>Assignments</h2>
+
+          <div class="assignments-filter" role="tablist" aria-label="Filter assignments">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+            <button class="filter-btn" data-filter="ongoing" role="tab" aria-selected="false">Ongoing</button>
+            <button class="filter-btn" data-filter="upcoming" role="tab" aria-selected="false">Upcoming</button>
+            <button class="filter-btn" data-filter="completed" role="tab" aria-selected="false">Completed</button>
+          </div>
+
+          <div class="assignments-marquee" aria-hidden="false">
+            <div class="marquee-row" data-speed="80">
+              <div class="marquee-track"></div>
+            </div>
+            <div class="marquee-row" data-speed="115">
+              <div class="marquee-track"></div>
+            </div>
+            <div class="marquee-row" data-speed="100">
+              <div class="marquee-track"></div>
+            </div>
+          </div>
+
+          <div class="assignments-actions">
+            <button class="btn view-static-btn" type="button">Open Static View</button>
+          </div>
+
+          <div class="assignments-static" hidden>
+            <div class="static-controls">
+              <button class="static-close" type="button" aria-label="Close static view">Close</button>
+              <div class="static-nav">
+                <button class="static-prev" type="button" aria-label="Previous page">‹</button>
+                <span class="static-page-indicator">1 / 1</span>
+                <button class="static-next" type="button" aria-label="Next page">›</button>
+              </div>
+            </div>
+
+            <div class="static-viewport">
+              <div class="static-strip">
+                <!-- pages injected here -->
+              </div>
+            </div>
+          </div>
+
+          <div class="assignments-grid assignments-source" hidden>
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Bloomfield Hills, Michigan</p>
+              <p class="assignment-body">Consulting engagement for fire loss.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Consulting engagement for fire loss (Library Retail).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Tornado Loss Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Athens, Tennessee</p>
+              <p class="assignment-body">Consulting engagement following tornado damage (Church & School Campus).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Storm Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Brainerd, Minnesota</p>
+              <p class="assignment-body">Consulting engagement for storm damage (Vacation Resort).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Condominium building reconstruction following fire.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Burlington, Wisconsin</p>
+              <p class="assignment-body">Consulting engagement for fire damage (Processing Plant).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Luxury apartment building reconstruction following fire.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Peoria, Illinois</p>
+              <p class="assignment-body">Reconstruction following fire loss (Hickory project).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Office Suite Construction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Downers Grove, Illinois</p>
+              <p class="assignment-body">Office suite construction (PLRB/LIRB).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Roof Collapse Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">St. Charles, Illinois</p>
+              <p class="assignment-body">Reconstruction following roof collapse (Aquascape).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Downers Grove, Illinois</p>
+              <p class="assignment-body">New apartment building reconstruction following fire.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Tornado Loss Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Joplin, Missouri</p>
+              <p class="assignment-body">Consulting engagement after tornado damage (School District).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Reconstruction project (Know).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Appraisal</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Ostego, Michigan</p>
+              <p class="assignment-body">Appraisal services following fire damage.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Palatine, Illinois</p>
+              <p class="assignment-body">Consulting engagement for fire damage (Resale Store).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Explosion Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Belvidere, Illinois</p>
+              <p class="assignment-body">Consulting after explosion damage (Manufacturing Plant).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Mt. Carmel, Illinois</p>
+              <p class="assignment-body">Consulting for fire damage (Office Building).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Roof Collapse Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Cicero, Illinois</p>
+              <p class="assignment-body">Reconstruction following roof collapse (Meridian).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Arlington Heights, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Race Track).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">New Construction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Ballroom new construction project.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Hanover Park, Illinois</p>
+              <p class="assignment-body">Reconstruction following fire loss.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">West Chicago, Illinois</p>
+              <p class="assignment-body">Reconstruction following fire loss.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Reconstruction project (Hi-Rise).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Reconstruction project (Retail Store).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Milwaukee, Wisconsin</p>
+              <p class="assignment-body">Consulting engagement (Scrap facility).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Consulting engagement (3130 project).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Arbyrd, Missouri</p>
+              <p class="assignment-body">Consulting engagement for fire loss.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Lakemoor, Illinois</p>
+              <p class="assignment-body">Consulting engagement for fire loss.</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Milwaukee, Wisconsin</p>
+              <p class="assignment-body">Consulting engagement (Tool facility).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Grand Rapids, Michigan</p>
+              <p class="assignment-body">Consulting engagement for fire loss (Apartment Building).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Roof Collapse Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Blairstown, Iowa</p>
+              <p class="assignment-body">Consulting after roof collapse (Agricultural Building).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">New Construction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Skokie, Illinois</p>
+              <p class="assignment-body">New construction project (Maya Romanoff).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Hospers, Iowa</p>
+              <p class="assignment-body">Consulting engagement for fire loss (Pork facility).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Chicago, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Lawrence project).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">North Chicago, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Towing facility).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">St. Joseph, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Bus Garage).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Reconstruction</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">—</p>
+              <p class="assignment-body">Reconstruction project (Church).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">McHenry, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Overlooks).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Kiawah Island, South Carolina</p>
+              <p class="assignment-body">Consulting engagement (Custom Residence).</p>
+            </article>
+
+            <article class="assignment-card" data-status="completed">
+              <header class="assignment-head">
+                <h3 class="assignment-title">Fire Damage Consulting</h3>
+                <span class="badge completed">Completed</span>
+              </header>
+              <p class="assignment-meta">Wauconda, Illinois</p>
+              <p class="assignment-body">Consulting engagement (Golden Oaks Farms).</p>
+            </article>
+
+          </div>
+        </div>
+      </section>
 
     <!-- History -->
     <section id="history" class="view view-history">
-      <div class="view-content">
+      <div class="history-overlay">
         <h2>Our History</h2>
-        <p>
-          Established in 1895, Miner & East has more than a century of proven experience in construction and restoration.
-        </p>
+        <p class="history-kicker">125+ years of craftsmanship across Illinois and beyond.</p>
+        <a class="btn history-link" href="history.html">Explore the Interactive Timeline</a>
       </div>
     </section>
 
     <!-- Contact -->
     <section id="contact" class="view view-contact">
-      <div class="view-content">
-        <h2>Contact Us</h2>
-        <p>
-          Let’s build something exceptional together.<br>
-          Email: <a href="mailto:info@minerandeast.com">info@minerandeast.com</a><br>
-          Phone: (555) 123-4567
-        </p>
+      <div class="view-content contact-content">
+        <h2>Contact</h2>
+
+        <div class="contact-grid">
+          <div class="contact-map">
+            <iframe
+              title="Miner & East Location"
+              src="https://www.google.com/maps?q=1400+Jeffrey+Drive,+Addison,+IL+60101&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-block">
+              <h3>Eric Koertge</h3>
+              <a href="mailto:ekoertge@minereast.com">ekoertge@minereast.com</a>
+            </div>
+
+            <div class="contact-block">
+              <h3>Chris Dowell</h3>
+              <a href="mailto:cdowell@minereast.com">cdowell@minereast.com</a>
+            </div>
+
+            <div class="contact-block">
+              <h3>Office</h3>
+              <p>
+                1400 Jeffrey Drive<br>
+                Addison, IL 60101
+              </p>
+            </div>
+
+            <div class="contact-inline">
+              <a class="chip" href="tel:+16304954411">Phone (630) 495-4411</a>
+              <span class="chip chip-muted">Fax (630) 495-4542</span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
