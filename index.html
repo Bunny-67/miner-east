@@ -39,6 +39,11 @@ Developed: Sep 26, 2025
     </div>
 
     <nav class="nav hero-nav">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <ul>
         <li><a href="#intro" class="nav-home">The Team</a></li>
         <li><a href="#services">Services</a></li>
@@ -248,6 +253,11 @@ Developed: Sep 26, 2025
             <button class="filter-btn" data-filter="completed" role="tab" aria-selected="false">Completed</button>
           </div>
 
+          <div class="assignments-mobile-controls">
+            <button class="assignments-scroll-btn assignments-scroll-up" type="button" aria-label="Scroll up">▲</button>
+            <button class="assignments-scroll-btn assignments-scroll-down" type="button" aria-label="Scroll down">▼</button>
+          </div>
+
           <div class="assignments-marquee" aria-hidden="false">
             <div class="marquee-row" data-speed="80">
               <div class="marquee-track"></div>
@@ -306,7 +316,7 @@ Developed: Sep 26, 2025
                 <span class="badge completed">Completed</span>
               </header>
               <p class="assignment-meta">Athens, Tennessee</p>
-              <p class="assignment-body">Consulting engagement following tornado damage (Church & School Campus).</p>
+              <p class="assignment-body">Consulting engagement following tornado damage (Church &amp; School Campus).</p>
             </article>
 
             <article class="assignment-card" data-status="completed">
@@ -641,10 +651,10 @@ Developed: Sep 26, 2025
               <p class="assignment-meta">Wauconda, Illinois</p>
               <p class="assignment-body">Consulting engagement (Golden Oaks Farms).</p>
             </article>
-
           </div>
         </div>
       </section>
+
 
     <!-- History -->
     <section id="history" class="view view-history">

@@ -356,6 +356,27 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
+      const heroNav = document.querySelector('.hero-nav');
+      const heroToggle = heroNav ? heroNav.querySelector('.nav-toggle') : null;
+      const heroNavList = heroNav ? heroNav.querySelector('ul') : null;
+
+      if (heroToggle && heroNavList) {
+        heroToggle.addEventListener('click', () => {
+          const isOpen = heroNav.classList.toggle('open');
+          heroToggle.classList.toggle('is-open', isOpen);
+          heroToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+
+        heroNavList.querySelectorAll('a').forEach((a) => {
+          a.addEventListener('click', () => {
+            if (window.innerWidth <= 800) {
+              heroNav.classList.remove('open');
+              heroToggle.classList.remove('is-open');
+              heroToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+      }
 
   // ================================================
   // Services "word cloud" -> History 
@@ -526,5 +547,20 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   openMarquee();
+
+
+    const mobViewport = document.querySelector('.assignments-mobile-viewport');
+    const mobUp = document.querySelector('.assignments-scroll-up');
+    const mobDown = document.querySelector('.assignments-scroll-down');
+
+    if (mobViewport && mobUp && mobDown) {
+      const scrollStep = 200;
+      mobUp.addEventListener('click', () => {
+        mobViewport.scrollBy({ top: -scrollStep, behavior: 'smooth' });
+      });
+      mobDown.addEventListener('click', () => {
+        mobViewport.scrollBy({ top: scrollStep, behavior: 'smooth' });
+      });
+    }
 
 });
