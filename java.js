@@ -333,18 +333,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
     // ================================================
-    // Nav Toggle
+    // Top Nav Toggle (desktop / tablet)
     // ================================================
-    const navToggle = document.querySelector('.nav-toggle');
+    const navToggle = document.querySelector('.top-nav .nav-toggle');
     const topNavLinks = document.querySelector('.top-nav .nav-links');
-
+    
     if (navToggle && topNavLinks) {
       navToggle.addEventListener('click', () => {
         const isOpen = navToggle.classList.toggle('is-open');
         navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         topNavLinks.classList.toggle('open', isOpen);
       });
-
+    
       topNavLinks.querySelectorAll('a').forEach(a => {
         a.addEventListener('click', () => {
           if (window.innerWidth <= 800) {
@@ -355,6 +355,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       });
     }
+    
+    // ================================================
+    // Hero Nav Toggle (mobile primary nav)
+    // ================================================
+    const heroNav = document.querySelector('.hero-nav');
+    const heroToggle = heroNav ? heroNav.querySelector('.nav-toggle') : null;
+    const heroNavList = heroNav ? heroNav.querySelector('ul') : null;
+    
+    if (heroToggle && heroNavList) {
+      heroToggle.addEventListener('click', () => {
+        const isOpen = heroNav.classList.toggle('open');
+        heroToggle.classList.toggle('is-open', isOpen);
+        heroToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    
+      heroNavList.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.innerWidth <= 800) {
+            heroNav.classList.remove('open');
+            heroToggle.classList.remove('is-open');
+            heroToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    }
+
 
       const heroNav = document.querySelector('.hero-nav');
       const heroToggle = heroNav ? heroNav.querySelector('.nav-toggle') : null;
@@ -562,5 +588,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mobViewport.scrollBy({ top: scrollStep, behavior: 'smooth' });
       });
     }
+
 
 });
