@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Miner &amp; East | History Experience</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/LogoEx.png">
+
+  <!-- Optional: preload fonts same as main site -->
+  <link rel="preload" href="fonts/Zurich Bold Condensed BT.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/Montserrat-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="preload" href="fonts/MyriadPro-Regular.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="fonts/Helvetica Now Var.ttf" as="font" type="font/ttf" crossorigin>
+
+  <style>
+    body.history-experience {
+        margin: 0;
+        min-height: 100vh;
+        background: #000;
+        color: #fff;
+        font-family: 'Montserrat', Arial, sans-serif;
+        overflow-x: hidden;
+    }
+
+
+    .history-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .history-header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.75rem;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .history-header-left {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .history-logo {
+      display: block;
+      height: 44px;
+      width: auto;
+    }
+
+    .history-brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .history-brand-text span {
+      font-family: 'ZurichBold', sans-serif;
+      letter-spacing: 0.06em;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .history-brand-text small {
+      font-size: 0.75rem;
+      opacity: 0.85;
+    }
+
+    .history-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .history-back-link:hover {
+      background: rgba(0, 0, 0, 0.7);
+    }
+
+    .history-back-link-icon {
+      font-size: 1rem;
+    }
+
+    .history-main {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .history-slider {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .history-slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .history-slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3.5rem 4vw 3rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .history-slide.is-active {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .history-slide::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+        z-index: 0;
+    }
+
+
+    .history-slide-inner {
+      position: relative;
+      max-width: 1100px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+      z-index: 1;
+      color: #fff;
+    }
+
+    .history-text-block {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 18px;
+      padding: 1.75rem 2.1rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .history-eyebrow {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #ffefc4;
+      margin-bottom: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .history-title {
+      font-family: 'ZurichBold', sans-serif;
+      font-size: clamp(1.9rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      margin-bottom: 0.75rem;
+    }
+
+    .history-subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.82);
+      margin-bottom: 0.75rem;
+    }
+
+    .history-body {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .history-body p + p {
+      margin-top: 0.75rem;
+    }
+
+    .history-highlight {
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      background: rgba(134, 26, 29, 0.72);
+      border: 1px solid rgba(235, 188, 96, 0.4);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .history-highlight h3 {
+      font-family: 'ZurichBold', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffefc4;
+      margin-bottom: 0.5rem;
+    }
+
+    .history-highlight ul {
+      list-style: none;
+      padding-left: 0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .history-highlight li::before {
+      content: "•";
+      color: #ffefc4;
+      margin-right: 0.4rem;
+    }
+
+    .history-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      z-index: 5;
+      transition: background 0.25s ease, transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .history-nav-btn:hover {
+      background: rgba(0, 0, 0, 0.9);
+      border-color: #ffefc4;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .history-nav-btn.prev {
+      left: 1.25rem;
+    }
+
+    .history-nav-btn.next {
+      right: 1.25rem;
+    }
+
+    .history-progress {
+      position: absolute;
+      left: 1.75rem;
+      bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      z-index: 5;
+    }
+
+    .history-progress-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      opacity: 0.55;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      background: none;
+      border: none;
+      padding: 0;
+      color: #fff;
+      text-align: left;
+    }
+
+    .history-progress-dot-indicator {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: transparent;
+    }
+
+    .history-progress-dot-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+    }
+
+    .history-progress-dot.is-active {
+      opacity: 1;
+      transform: translateX(4px);
+    }
+
+    .history-progress-dot.is-active .history-progress-dot-indicator {
+      background: #ffefc4;
+      border-color: #ffefc4;
+    }
+
+    .history-progress-dot.is-active .history-progress-dot-label {
+      color: #ffefc4;
+    }
+
+    .history-slide-count {
+      position: absolute;
+      right: 1.75rem;
+      bottom: 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+      z-index: 5;
+    }
+
+    .history-slides .history-slide:first-of-type {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+
+    @media (max-width: 960px) {
+      .history-slide-inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 1.5rem;
+      }
+
+      .history-highlight {
+        max-width: 480px;
+      }
+
+      .history-nav-btn.prev {
+        left: 0.75rem;
+      }
+
+      .history-nav-btn.next {
+        right: 0.75rem;
+      }
+
+      .history-progress {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1.1rem;
+        flex-direction: row;
+        gap: 0.9rem;
+        padding: 0.3rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.7);
+      }
+
+      .history-slide-count {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body.history-experience {
+        overflow: hidden;
+      }
+
+      .history-header {
+        flex-direction: row;
+        padding-inline: 1rem;
+      }
+
+      .history-slide {
+        padding: 4.4rem 1.25rem 3.6rem;
+      }
+
+      .history-text-block {
+        padding: 1.4rem 1.35rem;
+      }
+
+      .history-title {
+        font-size: 1.6rem;
+      }
+
+      .history-body {
+        font-size: 0.92rem;
+      }
+
+      .history-nav-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.25rem;
+        top: auto;
+        bottom: 50%;
+        transform: translateY(50%);
+      }
+
+      .history-nav-btn.prev {
+        left: 0.5rem;
+      }
+
+      .history-nav-btn.next {
+        right: 0.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .history-header-left {
+        gap: 0.4rem;
+      }
+
+      .history-brand-text span {
+        font-size: 0.7rem;
+      }
+
+      .history-brand-text small {
+        font-size: 0.68rem;
+      }
+
+      .history-logo {
+        height: 38px;
+      }
+
+      .history-back-link {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.7rem;
+      }
+
+      .history-nav-btn {
+        display: none;
+      }
+
+      .history-progress {
+        bottom: 0.9rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="history-experience">
+  <div class="history-shell">
+    <header class="history-header">
+      <div class="history-header-left">
+        <img src="images/logo.png" alt="Miner &amp; East" class="history-logo">
+        <div class="history-brand-text">
+          <span>Miner &amp; East</span>
+          <small>Interactive History Experience</small>
+        </div>
+      </div>
+      <a href="index.html#history" class="history-back-link">
+        <span class="history-back-link-icon">←</span>
+        <span>Back to Website</span>
+      </a>
+    </header>
+
+    <main class="history-main">
+      <section class="history-slider" aria-label="Miner &amp; East History Timeline">
+        <button class="history-nav-btn prev" type="button" aria-label="Previous slide">‹</button>
+        <button class="history-nav-btn next" type="button" aria-label="Next slide">›</button>
+
+        <div class="history-slides">
+          <!-- Slide 1: Overview -->
+          <article class="history-slide is-active" data-bg="images/history-1.jpg" data-index="0" aria-hidden="false">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">125+ Years in Construction</div>
+                <h1 class="history-title">Building Chicago’s Story Since 1892</h1>
+                <p class="history-body">
+                  Miner &amp; East is one of Chicago’s oldest general contracting firms, with a continuous history that
+                  stretches back more than a century.
+                </p>
+                <p class="history-body">
+                  In over 125 years of general contracting and construction management, Miner &amp; East has learned what
+                  defines true service: <strong>flexibility, timeliness, technical skill, and competitive pricing</strong>.
+                  These are the fundamentals clients expect—and the fundamentals the firm consistently delivers.
+                </p>
+                <p class="history-body">
+                  Just as important are the energy, enthusiasm, and understanding of each client’s needs and goals that
+                  Miner &amp; East brings to every project, from emergency reconstruction to complex new construction.
+                </p>
+              </div>
+              <div class="history-highlight">
+                <h3>What we stand for</h3>
+                <ul>
+                  <li>Over 125 years of continuous operation</li>
+                  <li>Full-service general contracting &amp; construction management</li>
+                  <li>Deep experience in insurance loss, reconstruction, and new construction</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 2: Roots and Founding -->
+          <article class="history-slide" data-bg="images/history-2.jpg" data-index="1" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">1892–Early 1900s</div>
+                <h2 class="history-title">From Carpenter &amp; Builder to Miner &amp; East</h2>
+                <p class="history-subtitle">Founding &amp; early leadership</p>
+                <div class="history-body">
+                  <p>
+                    The roots of Miner &amp; East date back to
+                    <strong>John McInnis – Carpenter &amp; Builder</strong>, founded in 1892. Operating in the early 1900s,
+                    the firm was led by founder <strong>John McInnis</strong> alongside two superintendents:
+                    <strong>John E. Miner</strong> and <strong>Arvid East</strong>.
+                  </p>
+                  <p>
+                    When John McInnis retired, Miner and East acquired the business and formed
+                    <strong>Miner &amp; East</strong>, marking the beginning of a partnership that would carry the company
+                    through the next stage of its growth.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>Ownership begins</h3>
+                <ul>
+                  <li>1892 – John McInnis launches the original firm</li>
+                  <li>Early 1900s – Miner &amp; East emerge as core leaders</li>
+                  <li>Transition – McInnis retires, Miner &amp; East assume ownership</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 3: Incorporation & Stability -->
+          <article class="history-slide" data-bg="images/history-3.jpg" data-index="2" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">1920s–1930s</div>
+                <h2 class="history-title">Miner &amp; East Incorporated</h2>
+                <p class="history-subtitle">A growing partnership</p>
+                <div class="history-body">
+                  <p>
+                    After the original transition from John McInnis, the company continued to evolve. Following his
+                    graduation from the <strong>University of Chicago</strong>, <strong>John J. McInnis</strong>, son of
+                    the founder, joined the firm.
+                  </p>
+                  <p>
+                    In the early 1920s, <strong>Arvid East</strong> purchased John E. Miner’s shares and, in
+                    <strong>1926</strong>, John J. McInnis became a partner with East.
+                  </p>
+                  <p>
+                    In <strong>1932</strong>, Miner &amp; East formally incorporated. For many years, the firm was operated
+                    by <strong>Arvid East</strong> and <strong>John J. McInnis</strong>, providing steady leadership and a
+                    reputation for dependable construction services.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>Key milestones</h3>
+                <ul>
+                  <li>Early 1920s – Arvid East acquires Miner’s shares</li>
+                  <li>1926 – John J. McInnis becomes a partner</li>
+                  <li>1932 – Miner &amp; East incorporates</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 4: Postwar Growth -->
+          <article class="history-slide" data-bg="images/history-4.jpg" data-index="3" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">1940s–1950s</div>
+                <h2 class="history-title">A New Generation After World War II</h2>
+                <p class="history-subtitle">Dowell &amp; McInnis leadership</p>
+                <div class="history-body">
+                  <p>
+                    Following service as a Marine in the Pacific Theater during World War II,
+                    <strong>Sanford (Sandy) J. Dowell</strong> joined Miner &amp; East in <strong>1949</strong>.
+                  </p>
+                  <p>
+                    After graduating from the <strong>University of Pennsylvania</strong> and fulfilling his Marine
+                    military service, <strong>John (Jack) W. McInnis</strong>, grandson of founder John J. McInnis, joined
+                    the company in <strong>1955</strong>.
+                  </p>
+                  <p>
+                    Both Sandy Dowell and Jack McInnis became partners with <strong>Arvid East</strong> and
+                    <strong>John J. McInnis</strong>, positioning the firm for significant growth in the decades ahead.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>Leadership expands</h3>
+                <ul>
+                  <li>1949 – Sandy Dowell joins after Marine service</li>
+                  <li>1955 – Jack McInnis joins after military service &amp; university</li>
+                  <li>Dowell &amp; McInnis become partners with East and McInnis</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 5: Transition & Family Continuity -->
+          <article class="history-slide" data-bg="images/history-5.jpg" data-index="4" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">1960s–1980s</div>
+                <h2 class="history-title">From Founders to Long-Term Partners</h2>
+                <p class="history-subtitle">Retirements &amp; next generation</p>
+                <div class="history-body">
+                  <p>
+                    <strong>Arvid East</strong> retired in <strong>1960</strong>, followed by
+                    <strong>John J. McInnis</strong>. <strong>Sandy Dowell</strong> and <strong>Jack McInnis</strong>
+                    continued to operate the business as partners through the 1960s and 1970s.
+                  </p>
+                  <p>
+                    In the late 1960s, <strong>Michael S. Dowell</strong>, son of Sandy Dowell, began his career with
+                    Miner &amp; East after graduating from <strong>Monmouth College</strong>.
+                  </p>
+                  <p>
+                    In the early 1970s, <strong>Daniel J. Dowell</strong>, Sandy’s second son, joined the firm after
+                    graduating from the <strong>University of Arizona</strong>, further extending the Dowell family’s role
+                    in the company.
+                  </p>
+                  <p>
+                    Sandy Dowell retired in <strong>1983</strong> as president after 34 years with the firm.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>Continuity in leadership</h3>
+                <ul>
+                  <li>1960 – Retirement of Arvid East</li>
+                  <li>1960s–1970s – Dowell &amp; McInnis lead the firm</li>
+                  <li>Late 1960s–1970s – Michael &amp; Daniel Dowell join Miner &amp; East</li>
+                  <li>1983 – Sandy Dowell retires as president</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 6: Modern Era & Consulting Arm -->
+          <article class="history-slide" data-bg="images/history-6.jpg" data-index="5" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">1980s–2000s</div>
+                <h2 class="history-title">Carrying the Legacy Forward</h2>
+                <p class="history-subtitle">Transitions &amp; new directions</p>
+                <div class="history-body">
+                  <p>
+                    <strong>Jack McInnis</strong> retired in <strong>2005</strong> as chairman of the firm after an
+                    extraordinary 50-year career with Miner &amp; East.
+                  </p>
+                  <p>
+                    <strong>Michael S. Dowell</strong> devoted 38 years to the company before passing away in 2005 after a
+                    heroic five-year battle with cancer.
+                  </p>
+                  <p>
+                    In <strong>2002</strong>, <strong>Christopher S. Dowell</strong> (son of Daniel J. Dowell and grandson
+                    of Sandy Dowell) joined the firm after graduating from the <strong>University of Kansas</strong>.
+                  </p>
+                  <p>
+                    <strong>Eric D. Koertge</strong> came to Miner &amp; East in <strong>2005</strong> after graduating
+                    from the <strong>University of Illinois</strong> and spending seven years with W.E. O’Neil Construction
+                    Company, a major Chicago-area general contractor.
+                  </p>
+                  <p>
+                    In <strong>2012</strong>, Miner &amp; East separated the consulting arm of the firm and formed
+                    <strong>Miner &amp; East LLC</strong>, reflecting the company’s deep expertise in specialized
+                    construction consulting.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>New chapter</h3>
+                <ul>
+                  <li>2002 – Christopher S. Dowell joins the firm</li>
+                  <li>2005 – Eric D. Koertge joins after major GC experience</li>
+                  <li>2012 – Consulting arm becomes Miner &amp; East LLC</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+          <!-- Slide 7: Present Leadership -->
+          <article class="history-slide" data-bg="images/history-7.jpg" data-index="6" aria-hidden="true">
+            <div class="history-slide-inner">
+              <div class="history-text-block">
+                <div class="history-eyebrow">Today</div>
+                <h2 class="history-title">Miner &amp; East Leadership Today</h2>
+                <p class="history-subtitle">Carrying a 125-year legacy forward</p>
+                <div class="history-body">
+                  <p>
+                    Today, <strong>Daniel J. Dowell</strong> serves as <strong>owner and president</strong> of
+                    <strong>Miner &amp; East, Inc. General Contractors</strong>.
+                  </p>
+                  <p>
+                    <strong>Christopher S. Dowell</strong> is <strong>Executive Vice President</strong>, and
+                    <strong>Eric D. Koertge</strong> serves as <strong>Vice President</strong>.
+                  </p>
+                  <p>
+                    Together, Daniel J. Dowell, Christopher S. Dowell, and Eric Koertge are principal owners of
+                    <strong>Miner &amp; East LLC, Construction Consultants</strong>, blending deep heritage with modern
+                    technical expertise.
+                  </p>
+                  <p>
+                    Across general contracting, reconstruction, and consulting, Miner &amp; East remains committed to
+                    delivering the same values that have defined the firm for generations: honesty, craftsmanship, and
+                    a client-first approach.
+                  </p>
+                </div>
+              </div>
+              <div class="history-highlight">
+                <h3>Current principals</h3>
+                <ul>
+                  <li>Daniel J. Dowell – Owner &amp; President</li>
+                  <li>Christopher S. Dowell – Executive Vice President</li>
+                  <li>Eric D. Koertge – Vice President</li>
+                  <li>All three – Principal owners of Miner &amp; East LLC</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <div class="history-progress" aria-hidden="false">
+          <button class="history-progress-dot is-active" data-target="0" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">Overview</span>
+          </button>
+          <button class="history-progress-dot" data-target="1" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">1892 Roots</span>
+          </button>
+          <button class="history-progress-dot" data-target="2" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">Incorporation</span>
+          </button>
+          <button class="history-progress-dot" data-target="3" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">Postwar Era</span>
+          </button>
+          <button class="history-progress-dot" data-target="4" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">1960s–1980s</span>
+          </button>
+          <button class="history-progress-dot" data-target="5" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">Modern Era</span>
+          </button>
+          <button class="history-progress-dot" data-target="6" type="button">
+            <span class="history-progress-dot-indicator"></span>
+            <span class="history-progress-dot-label">Today</span>
+          </button>
+        </div>
+
+        <div class="history-slide-count">
+          <span id="historySlideCounter">1 / 7</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = Array.from(document.querySelectorAll('.history-slide'));
+      const prevBtn = document.querySelector('.history-nav-btn.prev');
+      const nextBtn = document.querySelector('.history-nav-btn.next');
+      const dots = Array.from(document.querySelectorAll('.history-progress-dot'));
+      const counter = document.getElementById('historySlideCounter');
+      const slider = document.querySelector('.history-slides');
+
+      slides.forEach(slide => {
+        const bg = slide.getAttribute('data-bg');
+        if (bg) slide.style.backgroundImage = `url('${bg}')`;
+      });
+
+      let current = 0;
+
+      function updateSlide(newIndex) {
+        if (!slides.length) return;
+        const total = slides.length;
+        current = (newIndex + total) % total;
+
+        slides.forEach((slide, idx) => {
+          const isActive = idx === current;
+          slide.classList.toggle('is-active', isActive);
+          slide.setAttribute('aria-hidden', isActive ? 'false' : 'true');
+        });
+
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('is-active', idx === current);
+        });
+
+        if (counter) {
+          counter.textContent = `${current + 1} / ${slides.length}`;
+        }
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => updateSlide(current - 1));
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => updateSlide(current + 1));
+      }
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => {
+          const t = parseInt(dot.getAttribute('data-target'), 10);
+          if (!Number.isNaN(t)) updateSlide(t);
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') updateSlide(current - 1);
+        if (e.key === 'ArrowRight') updateSlide(current + 1);
+      });
+
+      if (slider && 'ontouchstart' in window) {
+        let startX = 0;
+        let endX = 0;
+
+        slider.addEventListener('touchstart', (e) => {
+          startX = e.touches[0].clientX;
+        }, { passive: true });
+
+        slider.addEventListener('touchmove', (e) => {
+          endX = e.touches[0].clientX;
+        }, { passive: true });
+
+        slider.addEventListener('touchend', () => {
+          const deltaX = endX - startX;
+          const threshold = 40;
+          if (Math.abs(deltaX) > threshold) {
+            if (deltaX < 0) updateSlide(current + 1);
+            else updateSlide(current - 1);
+          }
+          startX = 0;
+          endX = 0;
+        });
+      }
+
+      updateSlide(0);
+    });
+  </script>
+</body>
+
+</html>

@@ -1731,3 +1731,17 @@ html, body {
 html {
   scroll-behavior: smooth;
 }
+
+@media (max-width: 800px) {
+  main {
+    margin-top: 100vh;      
+    scroll-snap-type: none; 
+  }
+
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: none;
+  }
+}
