@@ -332,6 +332,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+    // ================================================
+    // Nav Toggle
+    // ================================================
+    const navToggle = document.querySelector('.nav-toggle');
+    const topNavLinks = document.querySelector('.top-nav .nav-links');
+
+    if (navToggle && topNavLinks) {
+      navToggle.addEventListener('click', () => {
+        const isOpen = navToggle.classList.toggle('is-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        topNavLinks.classList.toggle('open', isOpen);
+      });
+
+      topNavLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          if (window.innerWidth <= 800) {
+            navToggle.classList.remove('is-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            topNavLinks.classList.remove('open');
+          }
+        });
+      });
+    }
+
+
   // ================================================
   // Services "word cloud" -> History 
   // ================================================

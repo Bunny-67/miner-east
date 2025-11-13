@@ -316,6 +316,88 @@ body .section, .view {
   color: #fff;
 }
 
+/* Top nav toggle */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: #fff;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle span + span {
+  margin-top: 4px;
+}
+
+.nav-toggle.is-open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.nav-toggle.is-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.is-open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 800px) {
+  .top-nav {
+    padding: 0 1.25rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .top-nav .nav-links {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    background: var(--primary);
+    flex-direction: column;
+    gap: 0;
+    padding: 0.75rem 1.5rem 1.25rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .top-nav .nav-links.open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .top-nav .nav-links li a {
+    width: 100%;
+    text-align: left;
+  }
+
+  .view {
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+  }
+
+  .view-content {
+    max-width: 100%;
+  }
+}
+
 /* ------------------------------------------------
    Secondary Landing 
 ------------------------------------------------- */
