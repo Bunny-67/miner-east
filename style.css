@@ -388,8 +388,10 @@ body .section, .view {
 }
 
 @media (max-width: 800px) {
+
+  /* Top nav becomes hamburger */
   .top-nav {
-    padding: 0 1.25rem;
+    display: none;
   }
 
   .nav-toggle {
@@ -423,19 +425,8 @@ body .section, .view {
     text-align: left;
   }
 
-  .view {
-    padding: 1.5rem 1rem;
-    align-items: flex-start;
-  }
 
-  .view-content {
-    max-width: 100%;
-  }
-
-  .top-nav {
-    display: none;
-  }
-
+  /* HERO NAV (mobile primary nav) */
   .hero-nav {
     position: fixed;
     top: 0;
@@ -444,6 +435,11 @@ body .section, .view {
     background: var(--primary);
     padding: 0.75rem 1.25rem;
     z-index: 1000;
+  }
+
+  .hero-nav .nav-toggle {
+    display: flex;
+    flex-direction: column;
   }
 
   .hero-nav ul {
@@ -462,18 +458,17 @@ body .section, .view {
     display: flex;
   }
 
-  .hero-nav .nav-toggle {
-    display: flex;
-    flex-direction: column;
-  }
-
   .hero-nav ul li a {
     display: block;
     text-align: left;
     padding: 0.35rem 0;
   }
 
+
+  /* VIEW FIX — the reason you got stuck */
   .view {
+    height: auto;
+    min-height: 100vh;
     padding: 1.5rem 1rem;
     align-items: flex-start;
   }
@@ -481,7 +476,23 @@ body .section, .view {
   .view-content {
     max-width: 100%;
   }
+
+
+  /* DISABLE DESKTOP SCROLL SNAP ON MOBILE */
+  main {
+    margin-top: 100vh;
+    scroll-snap-type: none;
+  }
+
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: none;
+  }
+
 }
+
 
 /* ------------------------------------------------
    Secondary Landing 
@@ -1745,3 +1756,4 @@ html {
     scroll-snap-align: none;
   }
 }
+
