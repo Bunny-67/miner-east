@@ -48,6 +48,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const topNav = document.querySelector('.top-nav');
   const mainEl = document.querySelector('main');
 
+  const heroNavBar = document.querySelector('.hero-nav');
+
+  const updateHeroNavContrast = () => {
+      if (!heroNavBar) return;
+
+      if (window.innerWidth > 800) {
+        heroNavBar.classList.remove('hero-nav--on-light');
+        return;
+      }
+
+      if (hero) {
+        const rect = hero.getBoundingClientRect();
+        const navHeight = heroNavBar.offsetHeight || 60;
+
+        if (rect.bottom <= navHeight + 8) {
+          heroNavBar.classList.add('hero-nav--on-light');
+        } else {
+          heroNavBar.classList.remove('hero-nav--on-light');
+        }
+      }
+    };
+
+  window.addEventListener('scroll', updateHeroNavContrast, { passive: true });
+  window.addEventListener('resize', updateHeroNavContrast);
+  updateHeroNavContrast();
+
+
   const isMobile =
     window.matchMedia('(max-width: 800px)').matches ||
     ('ontouchstart' in window) ||

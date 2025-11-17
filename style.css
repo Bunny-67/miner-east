@@ -1768,3 +1768,105 @@ html {
     scroll-snap-type: none;
   }
 }
+
+
+/* ================================================
+   Mobile-specific layout refinements
+   ================================================ */
+@media (max-width: 800px) {
+  .hero-nav {
+    background: transparent;
+    box-shadow: none;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .hero-nav-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-nav-logo img {
+    height: 40px;
+    width: auto;
+    transform: scaleY(1.05);
+  }
+
+  .hero-nav .hero-nav-toggle {
+    margin-left: auto;
+  }
+
+  .hero-nav .hero-nav-toggle span {
+    background: #ffffff;
+  }
+
+  .hero-logo {
+    width: clamp(260px, 55vw, 380px);
+    margin-bottom: 10px;
+  }
+
+  .hero .tagline {
+    font-size: 1.05rem;
+    margin-top: -8px;
+    margin-bottom: 1.1rem;
+  }
+
+
+  #services.view {
+    padding-top: 5rem;
+    padding-bottom: 4rem;
+  }
+
+  .services-intro {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .service-card {
+    padding: 1.5rem 1.25rem 1.4rem;
+  }
+
+  .service-card h3 {
+    font-size: 1.2rem;
+    min-height: auto;
+  }
+
+  .service-card p {
+    font-size: 0.98rem;
+  }
+
+  .services-summary {
+    display: none;
+  }
+
+
+  #assignments.view.view-assignments {
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
+    align-items: flex-start;
+  }
+
+  .view-assignments .assignments-content {
+    max-height: none;
+  }
+
+  #history.view {
+    display: none;
+  }
+
+  .hero-nav .nav-history-item,
+  .top-nav .nav-history-item {
+    display: none;
+  }
+}
+
+.hero-nav.hero-nav--on-light .hero-nav-toggle span {
+  background: var(--primary);
+}
