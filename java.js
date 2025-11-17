@@ -343,8 +343,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // ================================================
     // Nav Toggle
     // ================================================
-    const navToggle = document.querySelector('.nav-toggle');
-    const topNavLinks = document.querySelector('.top-nav .nav-links');
+      const navToggle = document.querySelector('.top-nav .nav-toggle');
+      const topNavLinks = document.querySelector('.top-nav .nav-links');
+
 
     if (navToggle && topNavLinks) {
       navToggle.addEventListener('click', () => {
