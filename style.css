@@ -1660,17 +1660,19 @@ h1, h2 {
 /* ------------------------------------------------
    Scroll snap / container adjustments
 ------------------------------------------------- */
-main {
-  display: block;
-  margin-top: 100vh;
-  scroll-snap-type: y mandatory;
-}
+@media (min-width: 801px) {
+  main {
+    display: block;
+    margin-top: 100vh;
+    scroll-snap-type: y mandatory;
+  }
 
-main > section,
-.secondary-landing,
-.view,
-.section {
-  scroll-snap-align: start;
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: start;
+  }
 }
 
 /* ------------------------------------------------
@@ -1698,7 +1700,43 @@ footer {
     padding: 4rem;
   }
 }
+@media (max-width: 800px) {
+  main {
+    margin-top: 0;
+    scroll-snap-type: none;
+  }
 
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: none;
+  }
+
+  .hero {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    transform: none !important;
+  }
+
+  .hero.move-up {
+    transform: none !important;
+  }
+
+  .secondary-landing {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .view {
+    height: auto;
+    min-height: 100vh;
+  }
+}
 @media (min-width: 1024px) {
   .section {
     display: flex;
