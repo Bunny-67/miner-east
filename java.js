@@ -48,7 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const topNav = document.querySelector('.top-nav');
   const mainEl = document.querySelector('main');
 
-  const isMobile = window.innerWidth <= 800;
+  const isMobile =
+    window.matchMedia('(max-width: 800px)').matches ||
+    ('ontouchstart' in window) ||
+    (navigator.maxTouchPoints > 0);
 
   let hasScrolled = false;
   let isAutoScrolling = false;

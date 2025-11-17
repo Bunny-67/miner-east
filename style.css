@@ -388,52 +388,18 @@ body .section, .view {
 }
 
 @media (max-width: 800px) {
+  body {
+    overflow-x: hidden;
+  }
+
   .top-nav {
+    display: none;
     padding: 0 1.25rem;
   }
 
   .nav-toggle {
     display: flex;
     flex-direction: column;
-  }
-
-  .top-nav .nav-links {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background: var(--primary);
-    flex-direction: column;
-    gap: 0;
-    padding: 0.75rem 1.5rem 1.25rem;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.25s ease, opacity 0.25s ease;
-  }
-
-  .top-nav .nav-links.open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .top-nav .nav-links li a {
-    width: 100%;
-    text-align: left;
-  }
-
-  .view {
-    padding: 1.5rem 1rem;
-    align-items: flex-start;
-  }
-
-  .view-content {
-    max-width: 100%;
-  }
-
-  .top-nav {
-    display: none;
   }
 
   .hero-nav {
@@ -444,6 +410,9 @@ body .section, .view {
     background: var(--primary);
     padding: 0.75rem 1.25rem;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .hero-nav ul {
@@ -473,6 +442,37 @@ body .section, .view {
     padding: 0.35rem 0;
   }
 
+  .hero {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    transform: none !important;
+  }
+
+  .hero.move-up {
+    transform: none !important;
+  }
+
+  .secondary-landing {
+    position: relative;
+    height: auto;
+    min-height: auto;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  main {
+    margin-top: 0;
+    scroll-snap-type: none;
+  }
+
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: none;
+  }
+
   .view {
     padding: 1.5rem 1rem;
     align-items: flex-start;
@@ -482,6 +482,7 @@ body .section, .view {
     max-width: 100%;
   }
 }
+
 
 /* ------------------------------------------------
    Secondary Landing 
@@ -1735,19 +1736,5 @@ html {
 @supports (-webkit-touch-callout: none) {
   main {
     scroll-snap-type: none;
-  }
-}
-
-@media (max-width: 800px) {
-  main {
-    margin-top: 100vh;      
-    scroll-snap-type: none; 
-  }
-
-  main > section,
-  .secondary-landing,
-  .view,
-  .section {
-    scroll-snap-align: none;
   }
 }
