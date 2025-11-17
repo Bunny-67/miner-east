@@ -346,66 +346,43 @@ document.addEventListener('DOMContentLoaded', () => {
       const navToggle = document.querySelector('.top-nav .nav-toggle');
       const topNavLinks = document.querySelector('.top-nav .nav-links');
 
-
-    if (navToggle && topNavLinks) {
-      navToggle.addEventListener('click', () => {
-        const isOpen = navToggle.classList.toggle('is-open');
-        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        topNavLinks.classList.toggle('open', isOpen);
-      });
-
-      topNavLinks.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          if (window.innerWidth <= 800) {
-            navToggle.classList.remove('is-open');
-            navToggle.setAttribute('aria-expanded', 'false');
-            topNavLinks.classList.remove('open');
-          }
-        });
-      });
-    }
-
-      const heroNav = document.querySelector('.hero-nav');
-      const heroToggle = heroNav ? heroNav.querySelector('.nav-toggle') : null;
-      const heroNavList = heroNav ? heroNav.querySelector('ul') : null;
-
-      if (heroToggle && heroNavList) {
-        heroToggle.addEventListener('click', () => {
-          const isOpen = heroNav.classList.toggle('open');
-          heroToggle.classList.toggle('is-open', isOpen);
-          heroToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (navToggle && topNavLinks) {
+        navToggle.addEventListener('click', () => {
+          const isOpen = navToggle.classList.toggle('is-open');
+          navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          topNavLinks.classList.toggle('open', isOpen);
         });
 
-        heroNavList.querySelectorAll('a').forEach((a) => {
+        topNavLinks.querySelectorAll('a').forEach(a => {
           a.addEventListener('click', () => {
             if (window.innerWidth <= 800) {
-              heroNav.classList.remove('open');
-              heroToggle.classList.remove('is-open');
-              heroToggle.setAttribute('aria-expanded', 'false');
+              navToggle.classList.remove('is-open');
+              navToggle.setAttribute('aria-expanded', 'false');
+              topNavLinks.classList.remove('open');
             }
           });
         });
       }
 
-  // ================================================
-  // Services "word cloud" -> History 
-  // ================================================
-  const cloudItems = document.querySelectorAll('.values-list li');
-  const historyEl = document.querySelector('#history');
-  if (cloudItems.length && historyEl) {
-    const goHistory = (evt) => {
-      evt?.preventDefault?.();
-      historyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    };
+      // ================================================
+      // Services "word cloud" -> History 
+      // ================================================
+      const cloudItems = document.querySelectorAll('.values-list li');
+      const historyEl = document.querySelector('#history');
+      if (cloudItems.length && historyEl) {
+        const goHistory = (evt) => {
+          evt?.preventDefault?.();
+          historyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
 
-    cloudItems.forEach(li => {
-      li.setAttribute('tabindex', '0');
-      li.addEventListener('click', goHistory);
-      li.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') goHistory(e);
-      });
-    });
-  }
+        cloudItems.forEach(li => {
+          li.setAttribute('tabindex', '0');
+          li.addEventListener('click', goHistory);
+          li.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') goHistory(e);
+          });
+        });
+      }
 
     // ================================================
     // Assignments: filter controls 
