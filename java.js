@@ -48,6 +48,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const topNav = document.querySelector('.top-nav');
   const mainEl = document.querySelector('main');
 
+  const isMobile = window.innerWidth <= 800;
+
   let hasScrolled = false;
   let isAutoScrolling = false;
   let holdAtIntroUntil = 0;
@@ -128,6 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Scroll Handler Logic 
   // ================================================
   const onScroll = () => {
+    if (isMobile) return;
     if (isAutoScrolling) return;
 
     const scrollY = window.scrollY || window.pageYOffset;
@@ -199,36 +202,38 @@ document.addEventListener('DOMContentLoaded', () => {
   onScroll();
 
   // ================================================
-  // Upward intent detection — expanded
+  // Upward intent detection
   // ================================================
-  window.addEventListener('wheel', (e) => {
-    if (isAutoScrolling) return;
+  if (!isMobile) {
+    window.addEventListener('wheel', (e) => {
+      if (isAutoScrolling) return;
 
-    const mainTop = getMainTop();
-    const scrollY = window.scrollY || window.pageYOffset;
+      const mainTop = getMainTop();
+      const scrollY = window.scrollY || window.pageYOffset;
 
-    if (hasScrolled && e.deltaY < 0 && scrollY < mainTop * 0.6) {
-      e.preventDefault();
-      holdAtIntroUntil = 0;
-      hero?.classList.remove('move-up');
-      secondary?.classList.remove('reveal');
-      topNav?.classList.remove('visible');
-      hasScrolled = false;
-      smoothScrollTo(0);
-      return;
-    }
+      if (hasScrolled && e.deltaY < 0 && scrollY < mainTop * 0.6) {
+        e.preventDefault();
+        holdAtIntroUntil = 0;
+        hero?.classList.remove('move-up');
+        secondary?.classList.remove('reveal');
+        topNav?.classList.remove('visible');
+        hasScrolled = false;
+        smoothScrollTo(0);
+        return;
+      }
 
-    const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
-    if (hasScrolled && nearIntroTop && e.deltaY < 0) {
-      e.preventDefault();
-      holdAtIntroUntil = 0;
-      hero?.classList.remove('move-up');
-      secondary?.classList.remove('reveal');
-      topNav?.classList.remove('visible');
-      hasScrolled = false;
-      smoothScrollTo(0);
-    }
-  }, { passive: false });
+      const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
+      if (hasScrolled && nearIntroTop && e.deltaY < 0) {
+        e.preventDefault();
+        holdAtIntroUntil = 0;
+        hero?.classList.remove('move-up');
+        secondary?.classList.remove('reveal');
+        topNav?.classList.remove('visible');
+        hasScrolled = false;
+        smoothScrollTo(0);
+      }
+    }, { passive: false });
+  }
 
   // ================================================
   // Cinematic View Transitions Between Sections

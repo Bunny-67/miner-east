@@ -367,7 +367,8 @@
 
     @media (max-width: 720px) {
       body.history-experience {
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: auto;
       }
 
       .history-header {
@@ -438,6 +439,12 @@
       .history-progress {
         bottom: 0.9rem;
       }
+
+      body.history-experience main {
+      margin-top: 0;
+      scroll-snap-type: none;
+    }
+
     }
   </style>
 </head>

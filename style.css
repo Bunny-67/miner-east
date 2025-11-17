@@ -1732,6 +1732,12 @@ html {
   scroll-behavior: smooth;
 }
 
+@supports (-webkit-touch-callout: none) {
+  main {
+    scroll-snap-type: none;
+  }
+}
+
 @media (max-width: 800px) {
   main {
     margin-top: 100vh;      
