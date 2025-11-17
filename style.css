@@ -399,7 +399,18 @@ body .section, .view {
   .top-nav {
     display: flex;
     top: 0;
-    padding: 0 1.25rem;
+    padding: 0 0.75rem;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .top-nav .nav-logo {
+    margin-right: auto;
+  }
+
+  .top-nav .nav-logo img {
+    height: 40px;
+    width: auto;
   }
 
   .nav-toggle {
@@ -1869,4 +1880,57 @@ html {
 
 .hero-nav.hero-nav--on-light .hero-nav-toggle span {
   background: var(--primary);
+}
+
+/* ================================================
+   Mobile Services layout
+   ================================================ */
+@media (max-width: 800px) {
+  .services-intro {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+  }
+
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: stretch;
+    margin-bottom: 3rem;
+  }
+
+  .service-card {
+    width: 88%;
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 1.4rem;
+    border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: none !important; 
+  }
+
+  .service-card:hover {
+    transform: none;
+  }
+
+  .service-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .service-card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .service-card:nth-child(odd) {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .service-card:nth-child(even) {
+    margin-left: auto;
+    margin-right: 0;
+  }
 }
