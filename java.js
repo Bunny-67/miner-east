@@ -561,7 +561,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  openMarquee();
+  if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
+    if (staticPanel) {
+      staticPanel.hidden = false;
+      if (marquee) marquee.hidden = true;
+      buildStatic();
+    }
+  } else {
+    openMarquee();
+  }
 
 
     const mobViewport = document.querySelector('.assignments-mobile-viewport');
