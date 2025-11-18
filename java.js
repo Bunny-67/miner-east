@@ -490,7 +490,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!staticStrip) return;
     staticStrip.innerHTML = '';
     const cards = gatherCards().map(c => c.cloneNode(true));
-    const perPage = 9;
+    const perPage = (window.matchMedia && window.matchMedia('(max-width: 800px)').matches)
+      ? 3
+      : 9;
     const pages = Math.max(1, Math.ceil(cards.length / perPage));
     staticState.page = 0;
     staticState.pages = pages;

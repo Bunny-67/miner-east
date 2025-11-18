@@ -1608,7 +1608,7 @@ html {
   }
 
   .services-content {
-    padding: 0;
+    padding: 0 0.75rem;
   }
 
   .services-content h2 {
@@ -1634,20 +1634,24 @@ html {
   }
 
   .service-card {
-    width: 100%;
+    width: calc(100% - 30px);
     max-width: none;
     margin: 0;
     padding: 0.75rem 0.85rem 0.85rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
   }
 
   .service-card:nth-child(odd) {
     align-self: flex-start;
+    margin-left: 15px;
+    margin-right: 0;
   }
 
   .service-card:nth-child(even) {
     align-self: flex-end;
+    margin-right: 15px;
+    margin-left: 0;
   }
 
   .service-card h3 {
@@ -1747,9 +1751,9 @@ html {
 ================================================ */
 @media (max-width: 600px) {
   .team-grid {
-    grid-template-columns: 1fr;
-    align-items: stretch;
-    gap: 1.25rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 1.25rem;
+    row-gap: 1.75rem;
   }
 
   .team-member {
@@ -1757,25 +1761,25 @@ html {
     flex-direction: column;
     height: 100%;
     padding: 1.25rem;
-    text-align: center;
   }
 
   .team-member img {
     width: 100%;
-    max-width: 220px;
+    max-width: 160px;
     height: auto;
     align-self: center;
     margin-bottom: 0.9rem;
   }
 
   .team-member h3 {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
 
   .team-member p {
     font-size: 0.95rem;
   }
 }
+
 
 
 /* ------------------------------------------------
