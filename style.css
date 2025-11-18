@@ -1791,16 +1791,28 @@ html {
    Safari Desktop
 ------------------------------------------------- */
 @supports (-webkit-touch-callout: none) and (not (pointer: coarse)) {
-  .hero {
+  .hero,
+  .hero.move-up {
     position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: none !important;
     height: auto;
     min-height: 100vh;
-    transform: none !important;
+    pointer-events: auto;
   }
 
   main {
     margin-top: 0;
     scroll-snap-type: none;
+  }
+
+  main > section,
+  .secondary-landing,
+  .view,
+  .section {
+    scroll-snap-align: none;
   }
 }
 
