@@ -75,10 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeroNavContrast();
 
 
-  const isMobile =
-    window.matchMedia('(max-width: 800px)').matches ||
-    ('ontouchstart' in window) ||
-    (navigator.maxTouchPoints > 0);
+  const isMobile = window.matchMedia('(max-width: 800px)').matches;
 
   let hasScrolled = false;
   let isAutoScrolling = false;

@@ -1780,11 +1780,21 @@ html {
   }
 }
 
-
-
 /* ------------------------------------------------
    Hero nav on light
 ------------------------------------------------- */
 .hero-nav.hero-nav--on-light .hero-nav-toggle span {
   background: var(--primary);
+}
+
+/* ------------------------------------------------
+   Safari Support
+------------------------------------------------- */
+@supports (-webkit-touch-callout: none) and (not (pointer: coarse)) {
+  .hero {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    transform: none !important;
+  }
 }
