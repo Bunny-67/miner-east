@@ -2,14 +2,14 @@
    Root vars
 ------------------------ */
 :root {
-  --primary: #861a1d;      /* maroon */
-  --accent: #ebbc60;       /* gold */
-  --bg: #ffffff;           /* white */
-  --text: #333333;         /* dark gray */
+  --primary: #861a1d;
+  --accent: #ebbc60;
+  --bg: #ffffff;
+  --text: #333333;
 }
 
 /* ------------------------------------------------
-   Font Imports 
+   Font Imports
 ------------------------------------------------- */
 @font-face {
   font-family: 'ZurichBold';
@@ -74,7 +74,6 @@ body {
   color: var(--text);
 }
 
-/* iOS momentum scrolling */
 html,
 body {
   -webkit-overflow-scrolling: touch;
@@ -88,7 +87,7 @@ body .section,
 
 /* ------------------------------------------------
    HERO
---------------------------------------------------*/
+-------------------------------------------------*/
 .hero {
   position: fixed;
   top: 0;
@@ -238,7 +237,7 @@ body .section,
 }
 
 /* ------------------------------------------------
-   TOP NAV 
+   TOP NAV
 ------------------------------------------------- */
 .top-nav {
   position: fixed;
@@ -279,7 +278,6 @@ body .section,
   height: 56px;
   width: auto;
 }
-
 
 .top-nav .nav-logo .and {
   font-family: 'MyriadProBold', sans-serif;
@@ -422,20 +420,6 @@ body .section,
   align-items: start;
 }
 
-@media (max-width: 900px) {
-  .team-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-}
-
 .team-member {
   background: #ffffff;
   border-radius: 12px;
@@ -553,44 +537,6 @@ body .section,
   margin-top: 1rem;
   font-size: 1rem;
   color: #555;
-}
-
-@media (min-width: 768px) {
-  .team-modal-inner {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .team-modal-inner img {
-    margin-right: 2rem;
-    margin-bottom: 0;
-  }
-}
-
-@media (max-width: 600px) {
-  .team-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
-
-  .team-member {
-    padding: 1rem;
-  }
-
-  .team-member img {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-  }
-
-  .team-member h3 {
-    font-size: 0.95rem;
-  }
-
-  .team-member p {
-    font-size: 0.85rem;
-  }
 }
 
 /* ------------------------------------------------
@@ -788,14 +734,6 @@ body .section,
   transform: scale(1.05);
 }
 
-@media (max-width: 1100px) {
-  .values-list {
-    height: 280px;
-    max-width: 800px;
-    left: 0;
-  }
-}
-
 /* ------------------------------------------------
    Full-Page Views (Assignments, History, Contact)
 ------------------------------------------------- */
@@ -904,17 +842,6 @@ body .section,
   align-items: stretch;
 }
 
-@media (max-width: 1000px) {
-  .assignments-grid {
-    grid-template-columns: repeat(2, minmax(260px, 1fr));
-  }
-}
-@media (max-width: 680px) {
-  .assignments-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .assignment-card {
   background: #ffffff;
   border-radius: 14px;
@@ -973,6 +900,7 @@ body .section,
   color: #fff;
   white-space: nowrap;
 }
+
 .badge.ongoing   { background: #1e88e5; }
 .badge.upcoming  { background: #8e24aa; }
 .badge.completed { background: #2e7d32; }
@@ -1011,6 +939,11 @@ body .section,
   animation: marquee-left 40s linear infinite;
 }
 
+.marquee-row:nth-child(2) .marquee-track {
+  animation-duration: 55s;
+  animation-direction: reverse;
+}
+
 .marquee-row:nth-child(3) .marquee-track {
   animation-duration: 70s;
 }
@@ -1038,12 +971,14 @@ body .section,
 .marquee-row .assignment-meta  { font-size: 0.9rem; margin-bottom: 0.3rem; }
 .marquee-row .assignment-body  { font-size: 0.95rem; line-height: 1.45; }
 
-.assignments-static[hidden] {
-  display: none !important;
-}
-
 .assignments-static {
   margin-top: 1.5rem;
+}
+
+.assignments-static[hidden],
+.assignments-source[hidden],
+.assignments-marquee[hidden] {
+  display: none !important;
 }
 
 .static-controls {
@@ -1122,10 +1057,16 @@ body .section,
   gap: 14px;
 }
 
-.assignments-source[hidden],
-.assignments-static[hidden] {
-  display: none !important;
+.assignments-static .assignment-card {
+  padding: 0.75rem 0.9rem;
+  border-radius: 12px;
 }
+
+.assignments-static .assignment-head    { margin-bottom: 0.25rem; }
+.assignments-static .assignment-title   { font-size: 1.05rem; line-height: 1.2; }
+.assignments-static .assignment-meta    { font-size: 0.9rem; margin: 0 0 0.25rem; }
+.assignments-static .assignment-body    { font-size: 0.95rem; line-height: 1.4; }
+.assignments-static .static-page        { gap: 10px; padding: 4px; }
 
 #assignments.view.view-assignments {
   height: 100vh;
@@ -1160,49 +1101,8 @@ body .section,
   overflow: hidden;
 }
 
-.assignments-static .assignment-card {
-  padding: 0.75rem 0.9rem;
-  border-radius: 12px;
-}
-
-.assignments-static .assignment-head    { margin-bottom: 0.25rem; }
-.assignments-static .assignment-title   { font-size: 1.05rem; line-height: 1.2; }
-.assignments-static .assignment-meta    { font-size: 0.9rem; margin: 0 0 0.25rem; }
-.assignments-static .assignment-body    { font-size: 0.95rem; line-height: 1.4; }
-.assignments-static .static-page        { gap: 10px; padding: 4px; }
-
-.marquee-row:nth-child(2) .marquee-track {
-  animation-duration: 55s;
-  animation-direction: reverse;
-}
-
-.assignments-marquee[hidden] {
-  display: none !important;
-}
-
 .assignments-mobile-controls {
   display: none;
-}
-
-@media (max-width: 1000px) {
-  .marquee-row {
-    height: 190px;
-  }
-  .marquee-row .assignment-card {
-    min-width: 320px;
-    width: 320px;
-  }
-  .static-page {
-    grid-template-columns: repeat(2, minmax(260px, 1fr));
-  }
-}
-@media (max-width: 680px) {
-  .assignments-marquee {
-    grid-template-rows: 1fr 1fr;
-  }
-  .static-page {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ------------------------------------------------
@@ -1371,21 +1271,6 @@ body .section,
   color: #2b2b2b;
 }
 
-@media (max-width: 980px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-  .contact-map iframe {
-    min-height: 320px;
-  }
-}
-
-@media (max-width: 800px) {
-  .view-contact .view-content {
-    padding: 2.5rem 1.75rem;
-  }
-}
-
 /* ------------------------------------------------
    Misc: legacy header styles
 ------------------------------------------------- */
@@ -1420,7 +1305,7 @@ body .section,
 }
 
 /* ------------------------------------------------
-   Legacy .section 
+   Legacy .section
 ------------------------------------------------- */
 .section {
   min-height: 100vh;
@@ -1444,7 +1329,6 @@ h1, h2 {
   margin-bottom: 1rem;
 }
 
-/* Shared button */
 .btn {
   display: inline-block;
   margin-top: 1rem;
@@ -1492,8 +1376,66 @@ footer {
 }
 
 /* ------------------------------------------------
-   Responsive breakpoints
+   Desktop / tablet breakpoints
 ------------------------------------------------- */
+@media (max-width: 1100px) {
+  .values-list {
+    height: 280px;
+    max-width: 800px;
+    left: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .assignments-grid {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+
+  .marquee-row {
+    height: 190px;
+  }
+
+  .marquee-row .assignment-card {
+    min-width: 320px;
+    width: 320px;
+  }
+
+  .static-page {
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+  }
+}
+
+@media (max-width: 980px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-map iframe {
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 900px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 680px) {
+  .assignments-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .assignments-marquee {
+    grid-template-rows: 1fr 1fr;
+  }
+
+  .static-page {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (min-width: 768px) {
   .hero-nav ul,
   .hero .nav ul {
@@ -1505,7 +1447,53 @@ footer {
   }
 }
 
+@media (min-width: 1024px) {
+  .section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    text-align: left;
+  }
+
+  .section h2,
+  .section h1 {
+    flex: 1;
+  }
+
+  .section p {
+    flex: 1;
+    max-width: 500px;
+  }
+}
+
+/* ------------------------------------------------
+   Global scroll adjustments
+------------------------------------------------- */
+html,
+body {
+  height: auto;
+  overflow-y: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@supports (-webkit-touch-callout: none) {
+  main {
+    scroll-snap-type: none;
+  }
+}
+
+/* ================================================
+   Mobile layout (max-width: 800px)
+================================================ */
 @media (max-width: 800px) {
+  body {
+    overflow-x: hidden;
+    background-color: var(--primary);
+  }
+
   main {
     margin-top: 0;
     scroll-snap-type: none;
@@ -1529,6 +1517,21 @@ footer {
     transform: none !important;
   }
 
+  .hero-nav {
+    display: none;
+  }
+
+  .hero-logo {
+    width: clamp(300px, 70vw, 420px);
+    margin-bottom: 10px;
+  }
+
+  .hero .tagline {
+    font-size: 1.05rem;
+    margin-top: -8px;
+    margin-bottom: 1.1rem;
+  }
+
   .secondary-landing {
     position: relative;
     height: auto;
@@ -1540,55 +1543,6 @@ footer {
   .view {
     height: auto;
     min-height: 100vh;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    text-align: left;
-  }
-
-  .section h2,
-  .section h1 {
-    flex: 1;
-  }
-
-  .section p {
-    flex: 1;
-    max-width: 500px;
-  }
-}
-
-html,
-body {
-  height: auto;
-  overflow-y: auto;
-}
-html {
-  scroll-behavior: smooth;
-}
-
-@supports (-webkit-touch-callout: none) {
-  main {
-    scroll-snap-type: none;
-  }
-}
-
-/* ================================================
-   Mobile-specific layout refinements
-================================================ */
-@media (max-width: 800px) {
-
-  body {
-    overflow-x: hidden;
-    background-color: var(--primary);
-  }
-
-  .hero-nav {
-    display: none;
   }
 
   .top-nav {
@@ -1644,17 +1598,6 @@ html {
     display: block !important;
   }
 
-  .hero-logo {
-    width: clamp(300px, 70vw, 420px);
-    margin-bottom: 10px;
-  }
-
-  .hero .tagline {
-    font-size: 1.05rem;
-    margin-top: -8px;
-    margin-bottom: 1.1rem;
-  }
-
   .services-content {
     padding: 0 1rem;
   }
@@ -1664,183 +1607,13 @@ html {
   }
 
   .services-intro {
-    max-width: none;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-  }
-
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 0.9rem;
-    margin: 0;
-  }
-
-  .service-card {
-    width: 88%;
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 1.1rem 0.9rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-  }
-
-  .service-card h3 {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-  }
-
-  .service-card p {
-    font-size: 0.9rem;
-    line-height: 1.4;
+    display: none;
   }
 
   .services-summary,
   .values-wrapper,
   .values-list {
     display: none !important;
-  }
-
-  .view-contact {
-    background: #f5f5f5;
-  }
-
-  .view-assignments {
-    height: auto;
-    min-height: 100vh;
-    overflow: visible;
-    align-items: flex-start;
-  }
-
-  .view-assignments .assignments-content {
-    max-height: none;
-  }
-
-  .assignments-marquee,
-  .assignments-actions,
-  .assignments-static {
-    display: block !important;
-  }
-
-  .assignments-marquee {
-    margin-top: 1rem;
-  }
-
-  .assignments-mobile,
-  .assignments-mobile-viewport,
-  .assignments-mobile-controls {
-    display: none !important;
-  }
-
-  #history.view {
-    display: none;
-  }
-
-  .hero-nav .nav-history-item,
-  .top-nav .nav-history-item {
-    display: none;
-  }
-}
-
-.hero-nav.hero-nav--on-light .hero-nav-toggle span {
-  background: var(--primary);
-}
-
-@media (max-width: 800px) {
-  .services-content {
-    padding: 0 1rem;
-  }
-
-  .services-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: stretch;
-    margin: 0;
-  }
-
-  .service-card {
-    width: 96%;
-    max-width: 520px;
-    margin: 0;
-    padding: 1.1rem 1rem 1rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    transform: none !important;
-  }
-
-  .service-card:nth-child(odd) {
-    margin-left: 0;
-    margin-right: auto;
-  }
-
-  .service-card:nth-child(even) {
-    margin-left: auto;
-    margin-right: 0;
-  }
-
-  .service-card h3 {
-    font-size: 1.05rem;
-    margin-bottom: 0.4rem;
-  }
-
-  .service-card p {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-
-  .view-assignments {
-    height: auto;
-    min-height: 100vh;
-    align-items: flex-start;
-  }
-
-  .view-assignments .assignments-content {
-    max-height: none;
-  }
-
-  .assignments-marquee,
-  .assignments-actions {
-    display: none !important;
-  }
-
-  .view-assignments .assignments-static {
-    display: block !important;
-  }
-
-  .view-assignments .assignments-static[hidden] {
-    display: block !important;
-  }
-
-  .view-assignments .static-viewport {
-    max-height: 70vh;
-    overflow-y: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .team-grid {
-    align-items: stretch;
-  }
-
-  .team-member {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    height: 100%;
-  }
-}
-
-/* ================================================
-   Mobile overrides: services, assignments, team
-================================================ */
-@media (max-width: 800px) {
-  .services-intro {
-    display: none;
-  }
-
-  .services-content {
-    padding: 0 1rem;
   }
 
   .services-grid {
@@ -1878,6 +1651,10 @@ html {
     line-height: 1.5;
   }
 
+  .view-contact {
+    background: #f5f5f5;
+  }
+
   .view-assignments {
     height: auto;
     min-height: 100vh;
@@ -1889,8 +1666,8 @@ html {
     padding: 0 1rem 1.5rem;
   }
 
-  .assignments-marquee,
-  .assignments-actions {
+  .view-assignments .assignments-marquee,
+  .view-assignments .assignments-actions {
     display: none !important;
   }
 
@@ -1927,8 +1704,26 @@ html {
     font-size: 0.9rem;
     line-height: 1.4;
   }
+
+  .assignments-mobile,
+  .assignments-mobile-viewport,
+  .assignments-mobile-controls {
+    display: none !important;
+  }
+
+  #history.view {
+    display: none;
+  }
+
+  .hero-nav .nav-history-item,
+  .top-nav .nav-history-item {
+    display: none;
+  }
 }
 
+/* ================================================
+   Small mobile layout (max-width: 600px)
+================================================ */
 @media (max-width: 600px) {
   .team-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1958,5 +1753,9 @@ html {
   }
 }
 
-
-/* END OF FILE */
+/* ------------------------------------------------
+   Hero nav on light
+------------------------------------------------- */
+.hero-nav.hero-nav--on-light .hero-nav-toggle span {
+  background: var(--primary);
+}
