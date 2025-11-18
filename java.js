@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
   'use strict';
 
+    const ua = navigator.userAgent || '';
+    const isSafari = /^((?!chrome|android).)*safari/i.test(ua);
+    const isIOS = /iphone|ipad|ipod/i.test(ua);
+
+
   // ================================================
   // Fade-in on Scroll for legacy .section
   // ================================================
@@ -75,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
   updateHeroNavContrast();
 
 
-  const isMobile = window.matchMedia('(max-width: 800px)').matches;
+  const isMobileWidth = window.matchMedia('(max-width: 800px)').matches;
+  const isMobile = isMobileWidth || isIOS;
+  const isSafariDesktop = isSafari && !isIOS && !isMobileWidth;
 
   let hasScrolled = false;
   let isAutoScrolling = false;
@@ -159,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Scroll Handler Logic 
   // ================================================
   const onScroll = () => {
-    if (isMobile) return;
+    if (isMobile || isSafariDesktop) return;
     if (isAutoScrolling) return;
 
     const scrollY = window.scrollY || window.pageYOffset;
@@ -227,41 +234,51 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const throttledScroll = throttle(onScroll, 100);
-  window.addEventListener('scroll', throttledScroll, { passive: true });
-  onScroll();
 
-  // ================================================
-  // Upward intent detection
-  // ================================================
-  if (!isMobile) {
-    window.addEventListener('wheel', (e) => {
-      if (isAutoScrolling) return;
+  if (isSafariDesktop) {
+    if (hero && secondary) {
+      hero.classList.add('move-up');
+      secondary.classList.add('reveal');
+      topNav?.classList.add('visible');
+      hasScrolled = true;
+    }
+  } else {
+    window.addEventListener('scroll', throttledScroll, { passive: true });
+    onScroll();
 
-      const mainTop = getMainTop();
-      const scrollY = window.scrollY || window.pageYOffset;
+    // ================================================
+    // Upward intent detection
+    // ================================================
+    if (!isMobile) {
+      window.addEventListener('wheel', (e) => {
+        if (isAutoScrolling) return;
 
-      if (hasScrolled && e.deltaY < 0 && scrollY < mainTop * 0.6) {
-        e.preventDefault();
-        holdAtIntroUntil = 0;
-        hero?.classList.remove('move-up');
-        secondary?.classList.remove('reveal');
-        topNav?.classList.remove('visible');
-        hasScrolled = false;
-        smoothScrollTo(0);
-        return;
-      }
+        const mainTop = getMainTop();
+        const scrollY = window.scrollY || window.pageYOffset;
 
-      const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
-      if (hasScrolled && nearIntroTop && e.deltaY < 0) {
-        e.preventDefault();
-        holdAtIntroUntil = 0;
-        hero?.classList.remove('move-up');
-        secondary?.classList.remove('reveal');
-        topNav?.classList.remove('visible');
-        hasScrolled = false;
-        smoothScrollTo(0);
-      }
-    }, { passive: false });
+        if (hasScrolled && e.deltaY < 0 && scrollY < mainTop * 0.6) {
+          e.preventDefault();
+          holdAtIntroUntil = 0;
+          hero?.classList.remove('move-up');
+          secondary?.classList.remove('reveal');
+          topNav?.classList.remove('visible');
+          hasScrolled = false;
+          smoothScrollTo(0);
+          return;
+        }
+
+        const nearIntroTop = Math.abs(scrollY - mainTop) <= 12;
+        if (hasScrolled && nearIntroTop && e.deltaY < 0) {
+          e.preventDefault();
+          holdAtIntroUntil = 0;
+          hero?.classList.remove('move-up');
+          secondary?.classList.remove('reveal');
+          topNav?.classList.remove('visible');
+          hasScrolled = false;
+          smoothScrollTo(0);
+        }
+      }, { passive: false });
+    }
   }
 
   // ================================================
