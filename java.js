@@ -124,7 +124,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (homeLi && (window.scrollY || window.pageYOffset) <= 5) {
     homeLi.style.display = 'none';
   }
-
+  if (isMobile && homeLi) {
+    homeLi.style.display = '';
+  }
 
   // ================================================
   // Hero & Top-Nav anchor links 
