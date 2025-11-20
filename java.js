@@ -132,35 +132,67 @@ document.addEventListener('DOMContentLoaded', () => {
     homeLi.style.display = '';
   }
 
-  // ================================================
-  // Hero & Top-Nav anchor links 
-  // ================================================
-  const navLinks = document.querySelectorAll(
-    '.hero-nav a[href^="#"]:not(.nav-home), .top-nav a[href^="#"]:not([href="#home"])'
-  );
+    // ================================================
+    // Hero & Top-Nav anchor links 
+    // ================================================
+    const navLinks = document.querySelectorAll(
+      '.hero-nav a[href^="#"]:not(.nav-home), .top-nav a[href^="#"]:not([href="#home"])'
+    );
 
-  navLinks.forEach(link => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      const targetId = link.getAttribute('href');
-      const target = document.querySelector(targetId);
-      if (!target) return;
+    // Helper: scroll with offset for the fixed top nav
+    const scrollToSection = (target) => {
+      const navHeight = topNav?.offsetHeight || 80;
+      const rect = target.getBoundingClientRect();
+      const y = rect.top + window.pageYOffset - navHeight;
+      smoothScrollTo(y);
+    };
 
-      const scrollY = window.scrollY || window.pageYOffset;
-      if (scrollY < window.innerHeight * 0.5 && hero && secondary) {
-        hero.classList.add('move-up');
-        secondary.classList.add('reveal');
-        topNav?.classList.add('visible');
-        hasScrolled = true;
+    navLinks.forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
 
-        setTimeout(() => {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 350);
-      } else {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+        const targetId = link.getAttribute('href');
+        if (!targetId || !targetId.startsWith('#')) return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        // Close mobile menu if it's open
+        const navToggle = document.querySelector('.top-nav .nav-toggle');
+        const topNavLinks = document.querySelector('.top-nav .nav-links');
+        if (navToggle && topNavLinks && topNavLinks.classList.contains('open')) {
+          navToggle.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+          topNavLinks.classList.remove('open');
+        }
+
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        const needsHeroTransition =
+          !hasScrolled &&
+          hero &&
+          secondary &&
+          !isMobile &&
+          !isSafariDesktop &&
+          scrollY < window.innerHeight * 0.5;
+
+        if (needsHeroTransition) {
+          // First time: animate hero up, then scroll to the section
+          hero.classList.add('move-up');
+          secondary.classList.add('reveal');
+          topNav?.classList.add('visible');
+          hasScrolled = true;
+
+          setTimeout(() => {
+            scrollToSection(target);
+          }, 900); // match the hero's 1s animation
+        } else {
+          // Already past hero or on mobile/Safari: just go straight there
+          scrollToSection(target);
+        }
+      });
     });
-  });
+
 
     // ================================================
     // Scroll Handler Logic 
@@ -311,12 +343,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================================================
   // Quick #services smooth-scroll hooks
   // ================================================
-  document.querySelectorAll('a[href="#services"]').forEach(link => {
+  document.querySelectorAll('.hero .hero-btn[href="#services"]').forEach(link => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
       const target = document.querySelector('#services');
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (!target) return;
+
+      const scrollY = window.scrollY || window.pageYOffset;
+      const needsHeroTransition =
+        !hasScrolled &&
+        hero &&
+        secondary &&
+        !isMobile &&
+        !isSafariDesktop &&
+        scrollY < window.innerHeight * 0.5;
+
+      if (needsHeroTransition) {
+        hero.classList.add('move-up');
+        secondary.classList.add('reveal');
+        topNav?.classList.add('visible');
+        hasScrolled = true;
+
+        setTimeout(() => {
+          scrollToSection(target);
+        }, 900);
+      } else {
+        scrollToSection(target);
       }
     });
   });
